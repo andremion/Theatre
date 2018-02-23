@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Theatre</string>
+
+    <!--Menu Actions-->
+    <string name="action_search">Search</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_event">Event</string>
+
+    <!--Warning/Error Messages-->
+    <string name="empty_icon" translatable="false">¯\\_(ツ)_/¯</string>
+    <string name="event_list_empty">Sorry, we couldn\'t find any event\n of this type</string>
+    <string name="review_list_empty">Sorry, we don\'t have\nany review yet</string>
+    <string name="unknown_error">Unknown error</string>
+
+    <!--Formatting-->
+    <string name="offer_price">Save £%1$.2f</string>
+    <string name="minimum_price">From £%1$.2f</string>
+</resources>

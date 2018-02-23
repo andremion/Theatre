@@ -1,0 +1,28 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.andremion.theatre.event.detail.EventDescriptionFragment">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="viewModel"
+            type="com.andremion.theatre.event.detail.EventDetailViewModel" />
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text='@{Html.fromHtml(viewModel.event.description)}'
+            tools:text="@tools:sample/lorem/random" />
+
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>

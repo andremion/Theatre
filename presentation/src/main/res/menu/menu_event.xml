@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.andremion.theatre.event.detail.EventActivity">
+
+    <item
+        android:id="@+id/action_event"
+        android:icon="@drawable/ic_local_play_white_24dp"
+        android:title="@string/action_event"
+        app:showAsAction="ifRoom" />
+</menu>

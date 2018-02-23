@@ -1,0 +1,124 @@
+ext {
+
+    compiler = [
+            java  : JavaVersion.VERSION_1_8,
+            kotlin: '1.2.20'
+    ]
+
+    android = [
+            buildTools: '27.0.3',
+            minSdk    : 16,
+            targetSdk : 27,
+            compileSdk: 27
+    ]
+
+    build = [
+            gradle: '3.0.1'
+    ]
+
+    application = [
+            id                       : 'com.andremion.theatre',
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
+    ]
+
+    // Libraries
+    daggerVersion = '2.14.+'
+    supportLibraryVersion = '27.0.+'
+    rxKotlinVersion = '2.2.+'
+    rxAndroidVersion = '2.0.+'
+    retrofitVersion = '2.3.+'
+    okHttpVersion = '3.9.+'
+    moshiVersion = '1.5.+'
+    moshiLazyAdapterVersion = '2.1'
+    lifecycleVersion = '1.1.0'
+    roomVersion = '1.1.0-alpha2'
+    constraintLayoutVersion = '1.0.+'
+    androidKtxVersion = '0.1'
+    glideVersion = '4.5.0'
+    leakCanaryVersion = '1.5.4'
+    stethoVersion = '1.5.0'
+
+    // Testing
+    jUnitVersion = '4.12'
+    mockitoVersion = '2.13.+'
+    espressoVersion = '3.0.+'
+
+    // Presentation
+
+    presentationKaptDependencies = [
+            "android.arch.lifecycle:compiler:$lifecycleVersion",
+            "com.google.dagger:dagger-compiler:${daggerVersion}",
+            "com.google.dagger:dagger-android-processor:${daggerVersion}",
+            "com.android.databinding:compiler:$build.gradle"
+    ]
+
+    presentationDependencies = [
+            "org.jetbrains.kotlin:kotlin-stdlib-jre8:$compiler.kotlin",
+            "com.google.dagger:dagger:${daggerVersion}",
+            "com.google.dagger:dagger-android-support:${daggerVersion}",
+            "android.arch.lifecycle:runtime:$lifecycleVersion",
+            "android.arch.lifecycle:extensions:$lifecycleVersion",
+            "android.arch.lifecycle:reactivestreams:$lifecycleVersion",
+            "com.android.support:design:$supportLibraryVersion",
+            "com.android.support:support-vector-drawable:$supportLibraryVersion",
+            "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            "com.android.support:cardview-v7:${supportLibraryVersion}",
+            "com.android.support.constraint:constraint-layout:${constraintLayoutVersion}",
+            "com.android.support.constraint:constraint-layout-solver:${constraintLayoutVersion}",
+            "androidx.core:core-ktx:${androidKtxVersion}",
+            "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            "com.github.bumptech.glide:glide:${glideVersion}",
+            "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            "android.arch.persistence.room:runtime:$roomVersion",
+            "com.facebook.stetho:stetho:$stethoVersion"
+    ]
+
+    presentationTestDependencies = [
+            "junit:junit:$jUnitVersion",
+            "org.mockito:mockito-core:${mockitoVersion}"
+    ]
+
+    presentationInstrumentationTestDependencies = [
+            "com.android.support.test.espresso:espresso-core:$espressoVersion",
+            "com.android.support:support-annotations:$supportLibraryVersion"
+    ]
+
+    // Domain
+
+    domainDependencies = [
+            "org.jetbrains.kotlin:kotlin-stdlib-jre8:$compiler.kotlin",
+            "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+    ]
+
+    domainTestDependencies = [
+            "junit:junit:$jUnitVersion",
+            "org.mockito:mockito-core:${mockitoVersion}"
+    ]
+
+    // Data
+
+    dataKaptDependencies = [
+            "android.arch.persistence.room:compiler:$roomVersion"
+    ]
+
+    dataDependencies = [
+            "org.jetbrains.kotlin:kotlin-stdlib-jre8:$compiler.kotlin",
+            "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
+            "com.squareup.retrofit2:converter-moshi:$retrofitVersion",
+            "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            "com.squareup.moshi:moshi-kotlin:$moshiVersion",
+            "com.serjltt.moshi:moshi-lazy-adapters:$moshiLazyAdapterVersion",
+            "android.arch.persistence.room:runtime:$roomVersion",
+            "android.arch.persistence.room:rxjava2:$roomVersion"
+    ]
+
+    dataTestDependencies = [
+            "junit:junit:$jUnitVersion",
+            "org.mockito:mockito-core:${mockitoVersion}"
+    ]
+}

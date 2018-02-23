@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.andremion.theatre.event.detail.EventActivity"
+    tools:showIn="@layout/activity_event"
+    tools:targetApi="lollipop">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="eventDetailViewModel"
+            type="com.andremion.theatre.event.detail.EventDetailViewModel" />
+
+        <variable
+            name="eventRatingViewModel"
+            type="com.andremion.theatre.event.detail.rating.EventRatingViewModel" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:fillViewport="true"
+        app:behavior_overlapTop="128dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginTop="32dp"
+            android:transitionName="@{@string/event_card_transition + eventDetailViewModel.event.id}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@android:color/darker_gray"
+            android:cropToPadding="true"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:scaleType="centerCrop"
+            android:transitionName="@{@string/event_image_transition + eventDetailViewModel.event.id}"
+            app:layout_constraintDimensionRatio="W,4:3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadUrl="@{eventDetailViewModel.event.thumbnail}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:transitionGroup="true"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardElevation="@dimen/design_appbar_elevation"
+            app:layout_constraintRight_toRightOf="@id/card_main"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{!eventDetailViewModel.event.price.isEmpty()}">
+
+            <TextView
+                android:id="@+id/text_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:maxLines="1"
+                android:text="@{eventDetailViewModel.event.price}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:textColorPrimaryInverse"
+                tools:text="@tools:sample/us_zipcodes" />
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:maxLines="2"
+            android:text="@{eventDetailViewModel.event.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:transitionName="@{@string/event_name_transition + eventDetailViewModel.event.id}"
+            app:layout_constraintLeft_toRightOf="@id/image_thumbnail"
+            app:layout_constraintRight_toRightOf="@id/card_main"
+            app:layout_constraintTop_toBottomOf="@id/card_price"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/text_venue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:maxLines="1"
+            android:text="@{eventDetailViewModel.venue.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintLeft_toRightOf="@id/image_thumbnail"
+            app:layout_constraintRight_toRightOf="@id/card_main"
+            app:layout_constraintTop_toBottomOf="@id/text_name"
+            tools:text="@tools:sample/cities" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:rating="@{eventRatingViewModel.result.rating}"
+            app:layout_constraintLeft_toRightOf="@id/image_thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/text_venue"
+            tools:rating="3.5" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:transitionGroup="true"
+            app:layout_constraintBottom_toBottomOf="@id/card_main"
+            app:layout_constraintLeft_toLeftOf="@id/card_main"
+            app:layout_constraintRight_toRightOf="@id/card_main"
+            app:layout_constraintTop_toBottomOf="@id/rating_bar"
+            app:pageMargin="@{@dimen/activity_horizontal_margin}}"
+            app:sectionAdapter="@{eventDetailViewModel.event.id}">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:setupWithViewPager="@{viewPager}" />
+
+        </android.support.v4.view.ViewPager>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="event_card_transition" translatable="false">event_card_transition</string>
+    <string name="event_image_transition" translatable="false">event_image_transition</string>
+    <string name="event_name_transition" translatable="false">event_name_transition</string>
+
+</resources>

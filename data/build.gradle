@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def ext = rootProject.extensions.ext
+    compileSdkVersion ext.android.compileSdk
+
+    defaultConfig {
+        minSdkVersion ext.android.minSdk
+        targetSdkVersion ext.android.targetSdk
+        versionCode ext.application.versionCode
+        versionName ext.application.versionName
+
+        testInstrumentationRunner ext.application.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+
+def API_URL = System.getenv("API_URL") ?: apiUrl
+def API_KEY = System.getenv("API_KEY") ?: apiKey
+
+android.buildTypes.each { type ->
+    type.buildConfigField "String", "API_URL", "\"$API_URL\""
+    type.buildConfigField "String", "API_KEY", "\"$API_KEY\""
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+    kapt dataKaptDependencies
+    implementation dataDependencies
+    testImplementation dataTestDependencies
+}

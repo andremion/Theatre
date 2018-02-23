@@ -1,0 +1,117 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="lollipop">
+
+    <data>
+
+        <variable
+            name="event"
+            type="com.andremion.theatre.event.list.model.EventModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingLeft="@dimen/text_margin"
+        android:paddingRight="@dimen/text_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="@dimen/text_margin"
+            android:transitionName="@{@string/event_card_transition + event.id}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/image_thumbnail"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_thumbnail"
+            android:layout_width="@dimen/image_thumbnail_size"
+            android:layout_height="@dimen/image_thumbnail_size"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginStart="@dimen/text_margin"
+            android:background="@android:color/darker_gray"
+            android:elevation="@dimen/design_appbar_elevation"
+            android:scaleType="centerCrop"
+            android:transitionName="@{@string/event_image_transition + event.id}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadUrl="@{event.thumbnail}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/text_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:layout_marginEnd="@dimen/text_margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:layout_marginTop="@dimen/text_margin"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@{event.price}"
+            android:textAlignment="textEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/cardview"
+            app:layout_constraintTop_toBottomOf="@id/image_thumbnail"
+            tools:text="@tools:sample/us_zipcodes" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{event.name}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:transitionName="@{@string/event_name_transition + event.id}"
+            app:layout_constraintLeft_toRightOf="@+id/image_thumbnail"
+            app:layout_constraintRight_toRightOf="@id/cardview"
+            app:layout_constraintTop_toTopOf="@id/cardview"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:elevation="@dimen/cardview_default_elevation"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@{event.tagLine}"
+            app:layout_constraintLeft_toRightOf="@+id/image_thumbnail"
+            app:layout_constraintRight_toLeftOf="@+id/button_ticket"
+            app:layout_constraintTop_toBottomOf="@+id/text_name"
+            tools:text="@tools:sample/lorem/random" />
+
+        <ImageButton
+            android:id="@+id/button_ticket"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="@dimen/design_fab_size_normal"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:elevation="@dimen/design_appbar_elevation"
+            android:src="@drawable/ic_local_play_white_24dp"
+            android:theme="@style/AppTheme.ColoredButtonOverlay"
+            app:layout_constraintBottom_toBottomOf="@id/cardview"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,27 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+sourceCompatibility = rootProject.extensions.ext.compiler.java
+targetCompatibility = rootProject.extensions.ext.compiler.java
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = rootProject.extensions.ext.compiler.java
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = rootProject.extensions.ext.compiler.java
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation domainDependencies
+    testImplementation domainTestDependencies
+}
+
+sourceSets {
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    test.kotlin.srcDirs += 'src/test/kotlin'
+}
