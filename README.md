@@ -5,7 +5,7 @@
 align='right' height='36' style='border:0px;height:36px;' src='https://developer.android.com/images/brand/en_generic_rgb_wo_60.png' border='0' /></a>
 # Theatre
 
-A pet project using a simple version of Clean Architecture + MVVM + Reactive Extensions and Android Architecture Components.</br>
+Pet project using a simple version of Clean Architecture + MVVM + Reactive Extensions and Android Architecture Components.</br>
 All this fetching data from [London Theatre Direct API](https://developer.londontheatredirect.com/).
 The main purpose is using the latest practices and libraries.
 
@@ -67,7 +67,10 @@ A debug bridge for Android applications.
 
 ## TODO
 
-* Add more unit tests.
+* [Add diagrams in README file to show the used architecture.](https://github.com/andremion/Theatre/issues/2)
+* [Add CI](https://github.com/andremion/Theatre/issues/3)
+* [Improve and add more unit tests](https://github.com/andremion/Theatre/issues/4)
+* [Add pagging on event list](https://github.com/andremion/Theatre/issues/5)
 
 ## Contributing
 
