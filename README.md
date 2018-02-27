@@ -6,7 +6,7 @@ align='right' height='36' style='border:0px;height:36px;' src='https://developer
 # Theatre
 
 Pet project using a simple version of Clean Architecture + MVVM + Reactive Extensions and Android Architecture Components.</br>
-The data is fetched from [London Theatre Direct API](https://developer.londontheatredirect.com/).</br>
+The data is fetched from [LondonTheatreDirect API](https://developer.londontheatredirect.com/).</br>
 The main purpose is using the latest practices and libraries.
 
 </br>
@@ -18,10 +18,12 @@ The main purpose is using the latest practices and libraries.
 <p align="center">
   <img alt='Sample' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/sample.gif"></br>
   <i>*Data from <a href='https://www.londontheatredirect.com/'>London Theatre Direct</a></i></br>
-  <i>*UI inspired by <a href='https://www.uplabs.com/posts/cinema-club-interface'>Yaroslav Zubko</a>'s design</i>
+  <i>**UI inspired by <a href='https://www.uplabs.com/posts/cinema-club-interface'>Yaroslav Zubko</a>'s design</i>
 </p>
 
 ## Architecture
+
+Uses concepts of the notorious Uncle Bob's architecture called [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
 
 <p align="center">
   <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/clean.png"></br>
@@ -33,7 +35,26 @@ The main purpose is using the latest practices and libraries.
   <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/layers.png"></br>
 </p>
 
+* View
+* View Model
+* Use Case
+* Entity
+* Gateway
+* Repository
+
 ### Data
+
+The **LondonTheatreDirect API** groups the data into APIs:
+
+* __System API:__
+_Obtain information about enum data types._
+
+Since the data is basically static, a Repository with database caching is used by Gateway.
+
+* __Inventory API:__
+_Obtain realtime information about events on sale, venues, prices and availability._
+
+Due the data volatility, it is used a Repository that caches in memory.
 
 <p align="center">
   <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/data.png"></br>
@@ -86,7 +107,7 @@ A debug bridge for Android applications.
 
 ## TODO
 
-* [Explain more about the architecure diagrams in README file.](https://github.com/andremion/Theatre/issues/2)
+* [Explain more about the architecture diagrams in README file.](https://github.com/andremion/Theatre/issues/2)
 * [Add CI](https://github.com/andremion/Theatre/issues/3)
 * [Improve and add more unit tests](https://github.com/andremion/Theatre/issues/4)
 * [Add pagging on event list](https://github.com/andremion/Theatre/issues/5)
