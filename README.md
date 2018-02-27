@@ -6,7 +6,7 @@ align='right' height='36' style='border:0px;height:36px;' src='https://developer
 # Theatre
 
 Pet project using a simple version of Clean Architecture + MVVM + Reactive Extensions and Android Architecture Components.</br>
-All this fetching data from [London Theatre Direct API](https://developer.londontheatredirect.com/).
+The data is fetched from [London Theatre Direct API](https://developer.londontheatredirect.com/).</br>
 The main purpose is using the latest practices and libraries.
 
 </br>
@@ -17,7 +17,26 @@ The main purpose is using the latest practices and libraries.
 
 <p align="center">
   <img alt='Sample' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/sample.gif"></br>
-  <i>*Data from London Theatre Direct</i>
+  <i>*Data from <a href='https://www.londontheatredirect.com/'>London Theatre Direct</a></i></br>
+  <i>*UI inspired by <a href='https://www.uplabs.com/posts/cinema-club-interface'>Yaroslav Zubko</a>'s design</i>
+</p>
+
+## Architecture
+
+<p align="center">
+  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/clean.png"></br>
+</p>
+
+### Layers
+
+<p align="center">
+  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/layers.png"></br>
+</p>
+
+### Data
+
+<p align="center">
+  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/data.png"></br>
 </p>
 
 ## Credentials
@@ -67,7 +86,7 @@ A debug bridge for Android applications.
 
 ## TODO
 
-* [Add diagrams in README file to show the used architecture.](https://github.com/andremion/Theatre/issues/2)
+* [Explain more about the architecure diagrams in README file.](https://github.com/andremion/Theatre/issues/2)
 * [Add CI](https://github.com/andremion/Theatre/issues/3)
 * [Improve and add more unit tests](https://github.com/andremion/Theatre/issues/4)
 * [Add pagging on event list](https://github.com/andremion/Theatre/issues/5)
