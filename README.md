@@ -60,6 +60,13 @@ Due the data volatility, it is used a Repository that caches in memory.
   <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/data.png"></br>
 </p>
 
+### Presentation
+
+<p align="center">
+  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/presentation.png"></br>
+</p>
+
+
 ## Credentials
 
 Register your account [here](https://iodocs.londontheatredirect.com/member/register) to get your developer key and put it into [gradle.properties](data/gradle.properties) file
