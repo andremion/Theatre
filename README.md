@@ -44,7 +44,7 @@ Uses concepts of the notorious Uncle Bob's architecture called [Clean Architectu
 
 ### Data
 
-The **LondonTheatreDirect API** groups the data into APIs:
+The **LondonTheatreDirect API** groups the data into:
 
 * __System API:__
 _Obtain information about enum data types._
@@ -64,7 +64,12 @@ Due the data volatility, it is used a Repository that caches in memory.
 
 Register your account [here](https://iodocs.londontheatredirect.com/member/register) to get your developer key and put it into [gradle.properties](data/gradle.properties) file
 
-## Libraries and tools used in the project
+## References, libraries and tools used in the project 
+
+* [Android Clean Architecture](https://github.com/android10/Android-CleanArchitecture)
+Sample app that is part of a series of blog posts about how to architect an android application using Uncle Bob's clean architecture approach.
+* [Android Architecture Blueprints](https://github.com/googlesamples/android-architecture)
+Demonstrate possible ways to help with testing, maintaining and extending of an Android app using different architectural concepts and tools.
 
 * [RX Java](https://github.com/ReactiveX/RxJava)
 A library for composing asynchronous and event-based programs using observable sequences for the Java VM.
