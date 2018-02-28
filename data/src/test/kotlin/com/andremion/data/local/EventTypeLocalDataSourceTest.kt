@@ -21,12 +21,13 @@ import com.andremion.data.local.model.EventTypeLocalModel
 import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @Suppress("IllegalIdentifier")
-@org.junit.runner.RunWith(MockitoJUnitRunner::class)
+@RunWith(MockitoJUnitRunner::class)
 /**
  * Enable the option to mock final classes is still a bit experimental, and requires a manual activation.
  * @see https://antonioleiva.com/mockito-2-kotlin/

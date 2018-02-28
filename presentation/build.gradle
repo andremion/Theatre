@@ -34,6 +34,16 @@ android {
     dataBinding {
         enabled true
     }
+
+    testOptions {
+        unitTests {
+            // By default, local unit tests throw an exception any time the code you are testing tries to access
+            // Android platform APIs (unless you mock Android dependencies yourself or with a testing
+            // framework like Mockito). However, you can enable the following property so that the test
+            // returns either null or zero when accessing platform APIs, rather than throwing an exception.
+            returnDefaultValues true
+        }
+    }
 }
 
 dependencies {
