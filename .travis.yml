@@ -1,0 +1,57 @@
+language: android
+
+jdk:
+  # Jdk version used by your project
+  # Prevent java.lang.UnsupportedClassVersionError: com/android/build/gradle/AppPlugin : Unsupported major.minor version 52.0
+  - oraclejdk8
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
+
+android:
+  components:
+
+    # Use the latest revision of Android SDK Tools
+    - platform-tools
+    - tools
+
+    # The BuildTools version used by your project
+    - build-tools-27.0.3
+
+    # The SDK version used to compile your project
+    - android-27
+
+    # Additional components
+    - extra-android-m2repository
+
+    # Specify system images to run emulators during the tests
+    - sys-img-armeabi-v7a-android-25
+    - sys-img-x86-android-25
+
+# Caching in Gradle means that to avoid uploading the cache after every build
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+# Prevent ./gradlew: Permission denied
+before_install:
+  - chmod +x gradlew
+
+# Emulator Management: Create, Start and Wait
+before_script:
+  - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
+#Build, and run tests
+script:
+  - ./gradlew test
+
+#Codecov
+#after_success:
+#  - bash <(curl -s https://codecov.io/bash)
