@@ -14,6 +14,7 @@ The main purpose is using the latest practices and libraries.
 [![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=true)](http://www.apache.org/licenses/LICENSE-2.0)
 ![minSdkVersion 16](https://img.shields.io/badge/minSdkVersion-16-red.svg?style=true)
 ![compileSdkVersion 27](https://img.shields.io/badge/compileSdkVersion-27-yellow.svg?style=true)
+[![Build Status](https://travis-ci.org/andremion/Theatre.svg?branch=master)](https://travis-ci.org/andremion/Theatre)
 
 <p align="center">
   <img alt='Sample' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/sample.gif"></br>
@@ -120,7 +121,6 @@ A debug bridge for Android applications.
 ## TODO
 
 * [Explain more about the architecture diagrams in README file.](https://github.com/andremion/Theatre/issues/2)
-* [Add CI](https://github.com/andremion/Theatre/issues/3)
 * [Improve and add more unit tests](https://github.com/andremion/Theatre/issues/4)
 * [Add pagging on event list](https://github.com/andremion/Theatre/issues/5)
 
