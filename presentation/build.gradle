@@ -47,11 +47,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':domain')
     implementation project(':data')
     kapt presentationKaptDependencies
     implementation presentationDependencies
+    debugImplementation presentationDebugDependencies
+    releaseImplementation presentationReleaseDependencies
     testImplementation presentationTestDependencies
     androidTestImplementation presentationInstrumentationTestDependencies
 }
