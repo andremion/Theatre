@@ -3,9 +3,11 @@ jdk: oraclejdk8
 
 env:
   matrix:
-    - ANDROID_TARGET=android-27
+    - ANDROID_TARGET=android-17 EMULATOR_TAG=google_apis EMULATOR_ABI=armeabi-v7a EMULATOR_API=17
+    - ANDROID_TARGET=android-27 EMULATOR_TAG=google_apis EMULATOR_ABI=armeabi-v7a EMULATOR_API=27
 
 android:
+  update_sdk: true
   components:
 
     # Use the latest revision of Android SDK Tools
@@ -22,13 +24,8 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
 
-# Caching in Gradle means that to avoid uploading the cache after every build
-before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+    # Specify system images to run emulators during the tests
+    - sys-img-$EMULATOR_ABI-$EMULATOR_TAG-$EMULATOR_API
 
 before_install:
   # Install the new version of the android-27 package
@@ -36,6 +33,23 @@ before_install:
   # Prevent ./gradlew: Permission denied
   - chmod +x gradlew
 
+# Emulator Management: Create, Start and Wait
+before_script:
+  - echo no | android create avd --force --name test --target $ANDROID_TARGET --tag $EMULATOR_TAG --abi $EMULATOR_ABI
+  - emulator -avd test -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+
 #Build, and run tests
 script:
-  - ./gradlew build test
+  - ./gradlew build test connectedAndroidTest
+
+# Avoid uploading the cache after every build
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
