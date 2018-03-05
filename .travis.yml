@@ -4,7 +4,7 @@ jdk: oraclejdk8
 env:
   matrix:
     - ANDROID_TARGET=android-17 EMULATOR_TAG=google_apis EMULATOR_ABI=armeabi-v7a EMULATOR_API=17
-    - ANDROID_TARGET=android-27 EMULATOR_TAG=google_apis EMULATOR_ABI=armeabi-v7a EMULATOR_API=27
+    - ANDROID_TARGET=android-23 EMULATOR_TAG=google_apis EMULATOR_ABI=armeabi-v7a EMULATOR_API=23
 
 android:
   update_sdk: true
