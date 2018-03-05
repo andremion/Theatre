@@ -5,9 +5,10 @@
 align='right' height='36' style='border:0px;height:36px;' src='https://developer.android.com/images/brand/en_generic_rgb_wo_60.png' border='0' /></a>
 # Theatre
 
-Pet project using a simple version of Clean Architecture + MVVM + Reactive Extensions and Android Architecture Components.</br>
-The data is fetched from [LondonTheatreDirect API](https://developer.londontheatredirect.com/).</br>
-The main purpose is using the latest practices and libraries.
+Pet project using Clean Architecture + MVVM + Reactive Extensions + Android Architecture Components.</br>
+The data is fetched from [LondonTheatreDirect API].</br>
+
+#### The main purpose is using the latest practices and libraries.
 
 </br>
 
@@ -24,24 +25,49 @@ The main purpose is using the latest practices and libraries.
 
 ## Architecture
 
-Uses concepts of the notorious Uncle Bob's architecture called [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
+Uses concepts of the notorious Uncle Bob's architecture called [Clean Architecture].</br>
+The software produced by this architecture is going to be:
+
+* Independent of Frameworks.
+* Testable.
+* Independent of UI.
+* Independent of Database.
+
+<img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/clean.png" align="right" width="50%"/>
+
+### The Dependency Rule
+
+The overriding rule of this architecture says that the source code dependencies always point inwards.</br>
+The outer tiers can only dependent of inner tiers. Therefore, the inner tiers know nothing about the outer tiers.</br>
+The more further you go through the concentric circles, the higher level the software becomes. Which means that the level of abstraction increases.
+
+### Entities
+
+An entity is a set of data structures. These entities are the business objects of the application and encapsulate the most general and high-level rules, such as Event or Rating.
+
+### Use Cases
+
+They are the operations of the application and may contain specific business rules.</br>
+This layer is isolated from database, UI, or any of the common frameworks.</br>
+All use case classes extends [UseCase] abstract class that sets up the schedulers of Reactive Extensions.</br>
+
+### Adapters
+
+It is a set of adapters that convert data from the format most convenient for the use cases and entities, to the format most convenient for some external agency such as the UI or Database.</br>
+It is this layer that will wholly contain the ViewModels of [MVVM] architectural pattern.</br>
+The models are likely just data structures that are passed from the view to the use cases, and vice versa.</br>
+Similarly, data is converted, in this layer, from the form most convenient for entities and use cases, into the form most convenient for whatever persistence framework is being used.
+
+### Frameworks
+
+The outermost layer is composed of frameworks and tools such as the Database and the Android Framework.</br>
+The Repository pattern is used to encapsulate the details about caching mechanism.
+
+### Modules WIP
 
 <p align="center">
-  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/clean.png"></br>
+  <img alt='Modules' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/modules.png"></br>
 </p>
-
-### Layers
-
-<p align="center">
-  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/layers.png"></br>
-</p>
-
-* View
-* View Model
-* Use Case
-* Entity
-* Gateway
-* Repository
 
 ### Data
 
@@ -58,19 +84,18 @@ _Obtain realtime information about events on sale, venues, prices and availabili
 Due the data volatility, it is used a Repository that caches in memory.
 
 <p align="center">
-  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/data.png"></br>
+  <img alt='Data' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/data.png"></br>
 </p>
 
-### Presentation
+### Presentation: WIP
 
 <p align="center">
-  <img alt='Clean' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/presentation.png"></br>
+  <img alt='Presentation' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/presentation.png"></br>
 </p>
-
 
 ## Credentials
 
-Register your account [here](https://iodocs.londontheatredirect.com/member/register) to get your developer key and put it into [gradle.properties](data/gradle.properties) file
+Register your account [Register Account] to get your developer key and put it into [gradle.properties] file
 
 ## References, libraries and tools used in the project 
 
@@ -157,3 +182,11 @@ Follow the "fork-and-pull" Git workflow.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+    
+    
+[LondonTheatreDirect API]: https://developer.londontheatredirect.com/ "LondonTheatreDirect API"
+[Clean Architecture]: https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html "Clean Architecture"
+[UseCase]: domain/src/main/kotlin/com/andremion/domain/UseCase.kt "UseCase"
+[MVVM]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel "MVVM"
+[Register Account]: https://iodocs.londontheatredirect.com/member/register "here"
+[gradle.properties]: data/gradle.properties "gradle.properties"
