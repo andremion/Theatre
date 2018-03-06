@@ -16,48 +16,41 @@
 
 package com.andremion.theatre
 
-import android.app.Activity
-import android.app.Application
-import android.support.v4.app.Fragment
+import android.content.Context
+import android.support.multidex.MultiDex
 import android.util.Log
-import com.andremion.theatre.internal.injection.component.DaggerApplicationComponent
 import com.facebook.stetho.Stetho
-import com.squareup.leakcanary.LeakCanary
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
 import java.io.IOException
 import java.net.SocketException
-import javax.inject.Inject
 
 
-class MainApplication : Application(), HasActivityInjector, HasSupportFragmentInjector {
-
-    @Inject
-    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
-
-    override fun activityInjector(): DispatchingAndroidInjector<Activity> = activityInjector
-    override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment> = fragmentInjector
+class MainApplication : DaggerApplication() {
 
     companion object {
         private const val LOG_TAG = "Theater"
     }
 
+    /**
+     * Versions of the platform prior to Android 5.0 (API level 21) use the Dalvik runtime for executing app code.
+     * By default, Dalvik limits apps to a single classes.dex bytecode file per APK.
+     * In order to get around this limitation, we can add the multidex support library to project.
+     */
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
+
     override fun onCreate() {
         super.onCreate()
 
-        // This process is dedicated to LeakCanary for heap analysis.
-        // You should not init your app in this process.
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return
-        }
+        Stetho.initializeWithDefaults(this)
 
-        LeakCanary.install(this)
+        setupReactiveX()
+    }
 
+    private fun setupReactiveX() {
         // Error handling in RxJava
         // https://github.com/ReactiveX/RxJava/wiki/What%27s-different-in-2.0#error-handling
         RxJavaPlugins.setErrorHandler { e ->
@@ -86,9 +79,5 @@ class MainApplication : Application(), HasActivityInjector, HasSupportFragmentIn
                 return@setErrorHandler
             }
         }
-
-        Stetho.initializeWithDefaults(this)
-
-        DaggerApplicationComponent.builder().create(this).inject(this)
     }
 }

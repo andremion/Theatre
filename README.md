@@ -138,8 +138,6 @@ Start with classes for managing your UI component lifecycle and handling data pe
 * [Dagger](https://google.github.io/dagger/)
 A fully static, compile-time dependency injection framework for both Java and Android.
 
-* [Leak Canary](https://github.com/square/leakcanary)
-A memory leak detection library for Android and Java.
 * [Stetho](http://facebook.github.io/stetho/)
 A debug bridge for Android applications.
 
