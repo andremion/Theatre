@@ -24,6 +24,7 @@ ext {
     ]
 
     // Libraries
+    multidexVersion = '1.0.2'
     daggerVersion = '2.14.+'
     supportLibraryVersion = '27.0.+'
     rxKotlinVersion = '2.2.+'
@@ -37,7 +38,6 @@ ext {
     constraintLayoutVersion = '1.0.+'
     androidKtxVersion = '0.1'
     glideVersion = '4.5.0'
-    leakCanaryVersion = '1.5.4'
     stethoVersion = '1.5.0'
 
     // Testing
@@ -55,6 +55,7 @@ ext {
     ]
 
     presentationDependencies = [
+            "com.android.support:multidex:$multidexVersion",
             "org.jetbrains.kotlin:kotlin-stdlib-jre8:$compiler.kotlin",
             "com.google.dagger:dagger:${daggerVersion}",
             "com.google.dagger:dagger-android-support:${daggerVersion}",
@@ -73,14 +74,6 @@ ext {
             "com.github.bumptech.glide:glide:${glideVersion}",
             "android.arch.persistence.room:runtime:$roomVersion",
             "com.facebook.stetho:stetho:$stethoVersion"
-    ]
-
-    presentationDebugDependencies = [
-            "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
-    ]
-
-    presentationReleaseDependencies = [
-            "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
     ]
 
     presentationTestDependencies = [

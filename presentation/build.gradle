@@ -52,8 +52,6 @@ dependencies {
     implementation project(':data')
     kapt presentationKaptDependencies
     implementation presentationDependencies
-    debugImplementation presentationDebugDependencies
-    releaseImplementation presentationReleaseDependencies
     testImplementation presentationTestDependencies
     androidTestImplementation presentationInstrumentationTestDependencies
 }
