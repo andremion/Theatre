@@ -18,7 +18,7 @@ package com.andremion.theatre.internal.injection.module.android
 
 import android.content.Context
 import com.andremion.domain.Schedulers
-import com.andremion.theatre.MainApplication
+import com.andremion.theatre.DaggerApplication
 import com.andremion.theatre.internal.scheduler.AppSchedulers
 import dagger.Module
 import dagger.Provides
@@ -29,7 +29,7 @@ internal class ApplicationModule {
 
     @Provides
     @Singleton
-    internal fun providesContext(application: MainApplication): Context = application.applicationContext
+    internal fun providesContext(application: DaggerApplication): Context = application.applicationContext
 
     @Provides
     @Singleton

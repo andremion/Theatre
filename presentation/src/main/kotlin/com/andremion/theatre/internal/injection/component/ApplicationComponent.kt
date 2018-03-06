@@ -16,7 +16,7 @@
 
 package com.andremion.theatre.internal.injection.component
 
-import com.andremion.theatre.MainApplication
+import com.andremion.theatre.DaggerApplication
 import com.andremion.theatre.internal.injection.module.DataModule
 import com.andremion.theatre.internal.injection.module.DomainModule
 import com.andremion.theatre.internal.injection.module.PresentationModule
@@ -38,8 +38,8 @@ import javax.inject.Singleton
     PresentationModule::class,
     DomainModule::class,
     DataModule::class])
-internal interface ApplicationComponent : AndroidInjector<MainApplication> {
+internal interface ApplicationComponent : AndroidInjector<DaggerApplication> {
 
     @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<MainApplication>()
+    abstract class Builder : AndroidInjector.Builder<DaggerApplication>()
 }
