@@ -18,11 +18,15 @@ package com.andremion.theatre.internal.injection.module.android
 
 import com.andremion.theatre.event.detail.EventActivity
 import com.andremion.theatre.home.HomeActivity
+import com.andremion.theatre.startup.StartupActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 internal abstract class ActivitiesModule {
+
+    @ContributesAndroidInjector()
+    internal abstract fun contributeStartupActivity(): StartupActivity
 
     @ContributesAndroidInjector()
     internal abstract fun contributeHomeActivity(): HomeActivity

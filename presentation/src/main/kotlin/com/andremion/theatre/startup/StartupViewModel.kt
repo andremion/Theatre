@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.event.type
+package com.andremion.theatre.startup
 
 import android.app.Application
+import android.arch.lifecycle.MutableLiveData
 import android.content.Context
-import android.databinding.ObservableArrayList
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
 import com.andremion.domain.entity.EventType
 import com.andremion.domain.interactor.EventTypeGetAllUseCase
 import com.andremion.theatre.R
@@ -28,34 +26,26 @@ import com.andremion.theatre.internal.util.BaseAndroidViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 
-class EventTypeViewModel(context: Context, private val eventTypeGetAllUseCase: EventTypeGetAllUseCase)
+class StartupViewModel(context: Context, private val eventTypeGetAllUseCase: EventTypeGetAllUseCase)
     : BaseAndroidViewModel(context.applicationContext as Application) {
 
-    val loading = ObservableBoolean()
-    val result = ObservableArrayList<EventType>()
-    val empty = ObservableBoolean()
-    val error = ObservableField<String>()
+    private val _result = MutableLiveData<Boolean>()
+    val result = _result
+    private val _error = MutableLiveData<String>()
+    val error = _error
 
-    fun loadEventTypeList() = addDisposable(getAllEventTypes())
+    fun startup() = addDisposable(getAllEventTypes())
 
     private fun getAllEventTypes(): Disposable {
         return eventTypeGetAllUseCase.execute()
                 .subscribeWith(object : DisposableObserver<List<EventType>>() {
 
-                    override fun onStart() {
-                        loading.set(true)
-                    }
-
                     override fun onNext(t: List<EventType>) {
-                        loading.set(false)
-                        result.clear()
-                        result.addAll(t)
-                        empty.set(t.isEmpty())
+                        result.value = true
                     }
 
                     override fun onError(t: Throwable) {
-                        loading.set(false)
-                        error.set(t.localizedMessage ?: t.message ?: context.getString(R.string.unknown_error))
+                        error.value = t.localizedMessage ?: t.message ?: context.getString(R.string.unknown_error)
                     }
 
                     override fun onComplete() {

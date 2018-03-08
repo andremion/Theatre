@@ -24,6 +24,7 @@ import com.andremion.theatre.event.detail.EventDetailViewModel
 import com.andremion.theatre.event.detail.rating.EventRatingViewModel
 import com.andremion.theatre.event.list.EventListViewModel
 import com.andremion.theatre.event.type.EventTypeViewModel
+import com.andremion.theatre.startup.StartupViewModel
 
 class ViewModelFactory(private val context: Context,
                        private val eventTypeGetAllUseCase: EventTypeGetAllUseCase,
@@ -35,6 +36,9 @@ class ViewModelFactory(private val context: Context,
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
             when {
+                modelClass.isAssignableFrom(StartupViewModel::class.java) ->
+                    StartupViewModel(context, eventTypeGetAllUseCase) as T
+
                 modelClass.isAssignableFrom(EventTypeViewModel::class.java) ->
                     EventTypeViewModel(context, eventTypeGetAllUseCase) as T
 

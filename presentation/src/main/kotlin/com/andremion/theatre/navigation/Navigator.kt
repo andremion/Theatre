@@ -23,11 +23,18 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.view.View
 import com.andremion.theatre.event.detail.EventActivity
+import com.andremion.theatre.home.HomeActivity
 
 class Navigator {
 
     companion object {
         private val EXTRA_EVENT = "${EventActivity::class.java.`package`.name}.extra.EVENT"
+    }
+
+    fun navigateToHome(activity: Activity) {
+        val intent = Intent(activity, HomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        activity.startActivity(intent)
     }
 
     fun navigateToEvent(activity: Activity, event: Int, sharedViews: Array<Pair<View, String>>) {
