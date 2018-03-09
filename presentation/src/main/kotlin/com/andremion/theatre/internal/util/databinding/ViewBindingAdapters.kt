@@ -17,6 +17,7 @@
 package com.andremion.theatre.internal.util.databinding
 
 import android.databinding.BindingAdapter
+import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.ImageView
@@ -39,10 +40,12 @@ object ViewBindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("showLongMessage")
-    fun showLongMessage(view: View, text: String?) {
+    @BindingAdapter("showLongMessage", "callback", requireAll = false)
+    fun showLongMessage(view: View, text: String?, callback: BaseTransientBottomBar.BaseCallback<Snackbar>? = null) {
         text?.let {
-            Snackbar.make(view, it, Snackbar.LENGTH_LONG).show()
+            val snackbar = Snackbar.make(view, it, Snackbar.LENGTH_LONG)
+            if (callback != null) snackbar.addCallback(callback)
+            snackbar.show()
         }
     }
 

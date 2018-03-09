@@ -23,6 +23,10 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+    <style name="AppTheme.Startup" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_startup</item>
+    </style>
+
     <style name="AppTheme.Event" parent="AppTheme.NoActionBar.TranslucentStatusBar">
 
     </style>

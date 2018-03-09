@@ -14,14 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".home.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".startup.StartupActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.Startup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".home.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".event.detail.EventActivity"
             android:label=""
