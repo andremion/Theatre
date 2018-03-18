@@ -1,0 +1,206 @@
+version: 2
+
+references:
+
+  ## Cache
+
+  cache_key: &cache_key
+    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "presentation/build.gradle" }}-{{ checksum "domain/build.gradle" }}-{{ checksum "data/build.gradle" }}
+  restore_cache: &restore_cache
+    restore_cache:
+      <<: *cache_key
+  save_cache: &save_cache
+    save_cache:
+      <<: *cache_key
+      paths:
+        - ~/.gradle
+        - ~/.m2
+
+  ## Workspace
+
+  workspace: &workspace
+    ~/workspace
+  attach_debug_workspace: &attach_debug_workspace
+    attach_workspace:
+      at: *workspace
+  attach_release_workspace: &attach_release_workspace
+    attach_workspace:
+      at: *workspace
+  persist_debug_workspace: &persist_debug_workspace
+    persist_to_workspace:
+      root: *workspace
+      paths:
+        - presentation/build/outputs/androidTest-results
+        - presentation/build/outputs/apk
+        - presentation/build/outputs/code-coverage
+        - presentation/build/test-results
+        - domain/build/test-results
+        - data/build/outputs/androidTest-results
+        - data/build/outputs/apk
+        - data/build/outputs/code-coverage
+        - data/build/test-results
+  persist_release_workspace: &persist_release_workspace
+    persist_to_workspace:
+      root: *workspace
+      paths:
+        - presentation/build
+        - domain/build
+        - data/build
+  attach_firebase_workspace: &attach_firebase_workspace
+    attach_workspace:
+      at: *workspace
+  persist_firebase_workspace: &persist_firebase_workspace
+    persist_to_workspace:
+      root: *workspace
+      paths:
+        - firebase
+
+  ## Docker image configurations
+
+  android_config: &android_config
+    working_directory: *workspace
+    docker:
+      - image: circleci/android:api-27-alpha
+    environment:
+      TERM: dumb
+      _JAVA_OPTIONS: "-Xmx2048m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m"'
+  gcloud_config: &gcloud_config
+    working_directory: *workspace
+    docker:
+      - image: google/cloud-sdk:latest
+    environment:
+      TERM: dumb
+
+  # Google Cloud Service
+
+  export_gcloud_key: &export_gcloud_key
+    run:
+      name: Export Google Cloud Service key environment variable
+      command: echo 'export GCLOUD_SERVICE_KEY="$GCLOUD_SERVICE_KEY"' >> $BASH_ENV
+  decode_gcloud_key: &decode_gcloud_key
+    run:
+      name: Decode Google Cloud credentials
+      command: echo $GCLOUD_SERVICE_KEY | base64 -di > ${HOME}/client-secret.json
+
+jobs:
+
+  ## Build debug APK and instrumented test APK
+
+  build_debug:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - *save_cache
+      - run:
+          name: Gradle build (debug)
+          command: ./gradlew -PciBuild=true :domain:assemble assembleDebug assembleAndroidTest
+      - *persist_debug_workspace
+      - store_artifacts:
+          path: presentation/build/outputs/apk/
+          destination: /apk/
+
+  ## Run unit tests
+
+  test_unit:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - *save_cache
+      - run:
+          name: Run unit tests
+          command: ./gradlew -PciBuild=true :domain:test testDebugUnitTest
+      - *persist_debug_workspace
+      - store_artifacts:
+          path: presentation/build/reports/
+          destination: /presentation/reports/
+      - store_artifacts:
+          path: domain/build/reports/
+          destination: /domain/reports/
+      - store_artifacts:
+          path: data/build/reports/
+          destination: /data/reports/
+      - store_test_results:
+          path: presentation/build/test-results/
+          destination: /presentation/test-results/
+      - store_test_results:
+          path: domain/build/test-results/
+          destination: /domain/test-results/
+      - store_test_results:
+          path: data/build/test-results/
+          destination: /data/test-results/
+
+  ## Run instrumented tests
+
+  test_instrumented:
+    <<: *gcloud_config
+    steps:
+      - *attach_debug_workspace
+      - *export_gcloud_key
+      - *decode_gcloud_key
+      - run:
+          name: Set Google Cloud target project
+          command: gcloud config set project theatre-8b64a
+      - run:
+          name: Authenticate with Google Cloud
+          command: gcloud auth activate-service-account firebase-adminsdk-b1xip@theatre-8b64a.iam.gserviceaccount.com --key-file ${HOME}/client-secret.json
+      - run:
+          name: Run instrumented test on Firebase Test Lab
+          command: gcloud firebase test android run --no-auto-google-login --type instrumentation --app presentation/build/outputs/apk/debug/presentation-debug.apk --test presentation/build/outputs/apk/androidTest/debug/presentation-debug-androidTest.apk --device model=Nexus5X,version=26,locale=en_US,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/coverage.ec --directories-to-pull=/sdcard --timeout 20m
+      - run:
+          name: Create directory to store test results
+          command: mkdir firebase
+      - run:
+          name: Download instrumented test results from Firebase Test Lab
+          command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-7nv0x51in57u6-kn0mnshhmuuuu | tail -1`*" /root/workspace/firebase/
+      - *persist_firebase_workspace
+      - store_artifacts:
+          path: firebase/
+          destination: /firebase/
+
+  ## Submit JaCoCo coverage report
+
+  report_coverage:
+    <<: *android_config
+    steps:
+      - checkout
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - *attach_debug_workspace
+      - *attach_firebase_workspace
+      - run:
+          name: Move Firebase coverage report
+          command: mkdir -p presentation/build/outputs/code-coverage/connected && cp firebase/Nexus5X-26-en_US-portrait/artifacts/coverage.ec presentation/build/outputs/code-coverage/connected/coverage.ec
+      - run:
+          name: Generate JaCoCo report
+          command: ./gradlew -PciBuild=true jacocoTestReport
+      - run:
+          name: Upload coverage report to CodeCov
+          command: bash <(curl -s https://codecov.io/bash)
+      - store_artifacts:
+          path: presentation/build/reports/
+          destination: /reports/
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build_debug
+      - test_unit
+      - test_instrumented:
+          requires:
+            - build_debug
+      - report_coverage:
+          requires:
+            - test_unit
+            - test_instrumented

@@ -14,11 +14,23 @@ android {
         versionName ext.application.versionName
         applicationId ext.application.id
         testInstrumentationRunner ext.application.testInstrumentationRunner
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary true
         multiDexEnabled true
     }
 
+    aaptOptions {
+        cruncherEnabled !ext.build.ciBuild
+    }
+
+    dexOptions {
+        // Skip pre-dexing when running on CI or when disabled via -DpreDex=false.
+        preDexLibraries !ext.build.ciBuild && ext.build.preDexEnabled
+    }
+
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -43,6 +55,7 @@ android {
             // returns either null or zero when accessing platform APIs, rather than throwing an exception.
             returnDefaultValues true
         }
+        animationsDisabled true
     }
 }
 
@@ -55,3 +68,5 @@ dependencies {
     testImplementation presentationTestDependencies
     androidTestImplementation presentationInstrumentationTestDependencies
 }
+
+apply from: '../configuration/jacoco.gradle'

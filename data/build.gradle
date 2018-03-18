@@ -16,6 +16,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -43,3 +46,5 @@ dependencies {
     implementation dataDependencies
     testImplementation dataTestDependencies
 }
+
+apply from: '../configuration/jacoco.gradle'
