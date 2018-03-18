@@ -44,7 +44,7 @@ The more further you go through the concentric circles, the higher level the sof
 
 ### Entities
 
-An entity is a set of data structures. These entities are the business objects of the application and encapsulate the most general and high-level rules, such as Event or Rating.
+An entity is a set of data structures. These entities are the business objects of the application and encapsulate the most general and high-level rules, such as [Event] or [Rating].
 
 ### Use Cases
 
@@ -64,13 +64,20 @@ Similarly, data is converted, in this layer, from the form most convenient for e
 The outermost layer is composed of frameworks and tools such as the Database and the Android Framework.</br>
 The Repository pattern is used to encapsulate the details about caching mechanism.
 
-### Modules WIP
+### The Dependency Inversion: WIP
+
+In order to not violate the Dependency Rule, the [Dependency Inversion Principle] must be used whenever complex data needs to be passed across a boundary to an inward layer. Instead of expecting and directly referencing a low-level component (e.g. as a function parameter), the high-level layer provides and references an interface that must be implemented and inherited from by the caller. This way, the conventional dependency relationship is inverted and the high-level layer is decoupled from the low-level component.
+
+
+### The Inversion of Control Principle and Dependency Injection: WIP
+
+### Modules: WIP
 
 <p align="center">
   <img alt='Modules' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/modules.png"></br>
 </p>
 
-### Data
+#### Data
 
 The **LondonTheatreDirect API** groups the data into:
 
@@ -88,7 +95,7 @@ Due the data volatility, it is used a Repository that caches in memory.
   <img alt='Data' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/data.png"></br>
 </p>
 
-### Presentation: WIP
+#### Presentation: WIP
 
 <p align="center">
   <img alt='Presentation' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/presentation.png"></br>
@@ -96,14 +103,35 @@ Due the data volatility, it is used a Repository that caches in memory.
 
 ## Credentials
 
-Register your account [Register Account] to get your developer key and put it into [gradle.properties] file
+Register your account [here] to get your developer key and put it into [gradle.properties] file
 
-## References, libraries and tools used in the project 
+## References
 
 * [Android Clean Architecture](https://github.com/android10/Android-CleanArchitecture)
 Sample app that is part of a series of blog posts about how to architect an android application using Uncle Bob's clean architecture approach.
 * [Android Architecture Blueprints](https://github.com/googlesamples/android-architecture)
 Demonstrate possible ways to help with testing, maintaining and extending of an Android app using different architectural concepts and tools.
+
+## Libraries and tools used in the project
+
+### Android
+
+* [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html)
+Provides additional convenience classes and features not available in the standard Framework API for easier development and support across more devices.
+* [Data Binding](https://developer.android.com/topic/libraries/data-binding)
+Write declarative layouts and minimize the glue code necessary to bind application logic and layouts.
+* [Android KTX](https://github.com/android/android-ktx)
+A set of Kotlin extensions for Android app development.
+
+### Architecture and Design
+
+* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
+A collection of libraries that help you design robust, testable, and maintainable apps.
+Start with classes for managing your UI component lifecycle and handling data persistence.
+* [Dagger](https://google.github.io/dagger/)
+A fully static, compile-time dependency injection framework for both Java and Android.
+
+### Reactive
 
 * [RX Java](https://github.com/ReactiveX/RxJava)
 A library for composing asynchronous and event-based programs using observable sequences for the Java VM.
@@ -111,13 +139,8 @@ A library for composing asynchronous and event-based programs using observable s
 RxJava bindings for Kotlin.
 * [RX Android](https://github.com/ReactiveX/RxAndroid)
 RxJava bindings for Android.
-* [Android KTX](https://github.com/android/android-ktx)
-A set of Kotlin extensions for Android app development.
 
-* [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html)
-Provides additional convenience classes and features not available in the standard Framework API for easier development and support across more devices.
-* [Data Binding](https://developer.android.com/topic/libraries/data-binding)
-Write declarative layouts and minimize the glue code necessary to bind application logic and layouts.
+### View and Image
 
 * [ConstraintLayout](https://developer.android.com/training/constraint-layout/index.html)
 Allows you to create large and complex layouts with a flat view hierarchy (no nested view groups).
@@ -126,6 +149,8 @@ A flexible view for providing a limited window into a large data set.
 * [Glide](https://github.com/bumptech/glide)
 An image loading and caching library for Android focused on smooth scrolling
 
+### Data Request
+
 * [Retrofit](http://square.github.io/retrofit/)
 A type-safe HTTP client for Android and Java.
 * [OkHttp](http://square.github.io/okhttp/)
@@ -133,11 +158,12 @@ An HTTP & HTTP/2 client for Android and Java applications.
 * [Moshi](https://github.com/square/moshi)
 A modern JSON library for Android and Java.
 
-* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
-A collection of libraries that help you design robust, testable, and maintainable apps.
-Start with classes for managing your UI component lifecycle and handling data persistence.
-* [Dagger](https://google.github.io/dagger/)
-A fully static, compile-time dependency injection framework for both Java and Android.
+### Persistence
+
+* [Room](https://developer.android.com/topic/libraries/architecture/room.html)
+The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
+
+### Debugging and tests
 
 * [Stetho](http://facebook.github.io/stetho/)
 A debug bridge for Android applications.
@@ -184,8 +210,11 @@ Follow the "fork-and-pull" Git workflow.
     
     
 [LondonTheatreDirect API]: https://developer.londontheatredirect.com/ "LondonTheatreDirect API"
-[Clean Architecture]: https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html "Clean Architecture"
-[UseCase]: domain/src/main/kotlin/com/andremion/domain/UseCase.kt "UseCase"
-[MVVM]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel "MVVM"
-[Register Account]: https://iodocs.londontheatredirect.com/member/register "here"
-[gradle.properties]: data/gradle.properties "gradle.properties"
+[Clean Architecture]: https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html "The Clean Architecture by Robert C. Martin"
+[UseCase]: domain/src/main/kotlin/com/andremion/domain/UseCase.kt "Use Case class"
+[Event]: domain/src/main/kotlin/com/andremion/domain/entity/Event.kt "Event entity"
+[Rating]: domain/src/main/kotlin/com/andremion/domain/entity/Rating.kt "Rating entity"
+[MVVM]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel "Model–View–ViewModel (MVVM) on Wikipedia"
+[Dependency Inversion Principle]: https://en.wikipedia.org/wiki/Dependency_inversion_principle "Dependency Inversion Principle on Wikipedia"
+[here]: https://iodocs.londontheatredirect.com/member/register "Register Account on LondonTheatreDirect API"
+[gradle.properties]: data/gradle.properties "gradle.properties file"
