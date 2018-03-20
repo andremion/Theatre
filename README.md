@@ -71,6 +71,10 @@ In order to not violate the Dependency Rule, the [Dependency Inversion Principle
 
 ### The Inversion of Control Principle and Dependency Injection: WIP
 
+<p align="center">
+  <img alt='Inversion of Control' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/inversion_of_control.png"></br>
+</p>
+
 ### Modules: WIP
 
 <p align="center">
