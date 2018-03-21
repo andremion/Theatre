@@ -64,16 +64,21 @@ Similarly, data is converted, in this layer, from the form most convenient for e
 The outermost layer is composed of frameworks and tools such as the Database and the Android Framework.</br>
 The Repository pattern is used to encapsulate the details about caching mechanism.
 
-### The Dependency Inversion: WIP
+### The Dependency Inversion
 
-In order to not violate the Dependency Rule, the [Dependency Inversion Principle] must be used whenever complex data needs to be passed across a boundary to an inward layer. Instead of expecting and directly referencing a low-level component (e.g. as a function parameter), the high-level layer provides and references an interface that must be implemented and inherited from by the caller. This way, the conventional dependency relationship is inverted and the high-level layer is decoupled from the low-level component.
-
-
-### The Inversion of Control Principle and Dependency Injection: WIP
+In order to not violate the Dependency Rule, the [Dependency Inversion principle] must be used whenever complex data needs to be passed across a boundary to an inward layer. Instead of expecting and directly referencing a low-level component (e.g. as a function parameter), the high-level layer provides and references an interface that must be implemented and inherited from by the caller. This way, the conventional dependency relationship is inverted and the high-level layer is decoupled from the low-level component.
 
 <p align="center">
   <img alt='Inversion of Control' src="https://raw.githubusercontent.com/andremion/Theatre/master/art/inversion_of_control.png"></br>
 </p>
+
+### The Dependency Injection
+
+To make the application more testable and avoid having to deal with object instantiations in many points, the [Dependency Injection technique] is used. 
+
+> Dependency injection is one form of the broader technique of inversion of control. As with other forms of inversion of control, dependency injection supports the dependency inversion principle.
+ 
+[Dagger] is the tool used for managing and injection of our dependencies. 
 
 ### Modules: WIP
 
@@ -132,7 +137,7 @@ A set of Kotlin extensions for Android app development.
 * [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html)
 A collection of libraries that help you design robust, testable, and maintainable apps.
 Start with classes for managing your UI component lifecycle and handling data persistence.
-* [Dagger](https://google.github.io/dagger/)
+* [Dagger]
 A fully static, compile-time dependency injection framework for both Java and Android.
 
 ### Reactive
@@ -219,6 +224,8 @@ Follow the "fork-and-pull" Git workflow.
 [Event]: domain/src/main/kotlin/com/andremion/domain/entity/Event.kt "Event entity"
 [Rating]: domain/src/main/kotlin/com/andremion/domain/entity/Rating.kt "Rating entity"
 [MVVM]: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel "Model–View–ViewModel (MVVM) on Wikipedia"
-[Dependency Inversion Principle]: https://en.wikipedia.org/wiki/Dependency_inversion_principle "Dependency Inversion Principle on Wikipedia"
+[Dependency Inversion principle]: https://en.wikipedia.org/wiki/Dependency_inversion_principle "Dependency Inversion principle on Wikipedia"
+[Dependency Injection technique]: https://en.wikipedia.org/wiki/Dependency_injection "Dependency Injection technique on Wikipedia"
+[Dagger]: https://google.github.io/dagger/ "Dagger"
 [here]: https://iodocs.londontheatredirect.com/member/register "Register Account on LondonTheatreDirect API"
 [gradle.properties]: data/gradle.properties "gradle.properties file"
