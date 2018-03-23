@@ -1,48 +1,63 @@
-apply plugin: 'jacoco'
+allprojects {
+    apply plugin: 'jacoco'
 
-jacoco {
-    toolVersion jacocoVersion
+    jacoco {
+        toolVersion jacocoVersion
+    }
+
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses = true
+    }
 }
 
-def coverageSourceDirs = ['src/main/java', 'src/main/kotlin']
+FileCollection jacocoSourceDirectories(Set subprojects) {
+    Set srcDirs = []
+    subprojects.each { project ->
+        srcDirs.add("$project.projectDir/src/main/kotlin")
+    }
+    return files(srcDirs)
+}
 
-task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+FileTree jacocoClassDirectories(Set subprojects) {
+    List<String> excludes = [
+            'android/**/*.*',
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/Dagger*.*',
+            '**/*Module_Provide*Factory.*',
+            '**/*_Factory.*',
+            '**/*_MembersInjector.*',
+            '**/injection/**/*.*',
+            '**/*_LifecycleAdapter.*'
+    ]
+    def classDirectories = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", exclude: excludes)
+    subprojects.each { project ->
+        classDirectories += fileTree(dir: "$project.buildDir/classes/kotlin/main", exclude: excludes)
+        classDirectories += fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", exclude: excludes)
+    }
+    return classDirectories
+}
+
+task jacocoTestReport(type: JacocoReport,
+        dependsOn: [":data:testDebugUnitTest",
+                    ":domain:test",
+                    ":presentation:testDebugUnitTest"]) {
     group = 'Reporting'
     description = 'Generate JaCoCo coverage reports'
+
+    sourceDirectories = jacocoSourceDirectories(subprojects)
+    classDirectories = jacocoClassDirectories(subprojects)
+    executionData = rootProject.fileTree(dir: '.', includes: [
+            "**/testDebugUnitTest.exec", "**/test.exec", "**/*coverage.ec"
+    ])
 
     reports {
         xml.enabled = true
         html.enabled = true
-    }
-
-    classDirectories = fileTree(
-            dir: 'build/intermediates/classes/debug',
-            excludes: [
-                    '**/R.class',
-                    '**/R$*.class',
-                    '**/*$ViewInjector*.*',
-                    '**/*$ViewBinder*.*',
-                    '**/BuildConfig.*',
-                    '**/Manifest*.*',
-                    '**/Dagger*.*',
-                    '**/*Module_Provide*Factory.*',
-                    '**/*_Factory.*',
-                    '**/*_MembersInjector.*',
-                    '**/*_LifecycleAdapter.*'
-            ]
-    )
-
-    sourceDirectories = files(coverageSourceDirs)
-    executionData = fileTree(
-            dir: "$buildDir",
-            include: ['jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec']
-    )
-
-    doFirst {
-        files('build/intermediates/classes/debug').getFiles().each { file ->
-            if (file.name.contains('$$')) {
-                file.renameTo(file.path.replace('$$', '$'))
-            }
-        }
+        html.destination file("${rootProject.buildDir}/reports/coverage")
     }
 }

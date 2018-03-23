@@ -68,5 +68,3 @@ dependencies {
     testImplementation presentationTestDependencies
     androidTestImplementation presentationInstrumentationTestDependencies
 }
-
-apply from: '../configuration/jacoco.gradle'
