@@ -34,6 +34,7 @@ references:
         - presentation/build/outputs/apk
         - presentation/build/outputs/code-coverage
         - presentation/build/test-results
+        - domain/build/jacoco
         - domain/build/test-results
         - data/build/outputs/androidTest-results
         - data/build/outputs/apk
@@ -188,7 +189,7 @@ jobs:
           name: Upload coverage report to CodeCov
           command: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
-          path: presentation/build/reports/
+          path: /build/reports/coverage/
           destination: /reports/
 
 workflows:

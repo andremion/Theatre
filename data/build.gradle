@@ -46,5 +46,3 @@ dependencies {
     implementation dataDependencies
     testImplementation dataTestDependencies
 }
-
-apply from: '../configuration/jacoco.gradle'
