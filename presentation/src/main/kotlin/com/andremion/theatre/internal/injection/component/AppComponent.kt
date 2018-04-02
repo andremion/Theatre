@@ -16,13 +16,10 @@
 
 package com.andremion.theatre.internal.injection.component
 
-import com.andremion.theatre.DaggerApplication
+import com.andremion.theatre.internal.injection.DaggerApplication
+import com.andremion.theatre.internal.injection.module.ActivitiesModule
+import com.andremion.theatre.internal.injection.module.AppModule
 import com.andremion.theatre.internal.injection.module.DataModule
-import com.andremion.theatre.internal.injection.module.DomainModule
-import com.andremion.theatre.internal.injection.module.PresentationModule
-import com.andremion.theatre.internal.injection.module.android.ActivitiesModule
-import com.andremion.theatre.internal.injection.module.android.ApplicationModule
-import com.andremion.theatre.internal.injection.module.android.FragmentsModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -32,13 +29,9 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     ActivitiesModule::class,
-    FragmentsModule::class,
-
-    ApplicationModule::class,
-    PresentationModule::class,
-    DomainModule::class,
+    AppModule::class,
     DataModule::class])
-internal interface ApplicationComponent : AndroidInjector<DaggerApplication> {
+internal interface AppComponent : AndroidInjector<DaggerApplication> {
 
     @Component.Builder
     abstract class Builder : AndroidInjector.Builder<DaggerApplication>()

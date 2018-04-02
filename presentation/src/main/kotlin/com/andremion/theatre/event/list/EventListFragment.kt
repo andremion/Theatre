@@ -16,10 +16,10 @@
 
 package com.andremion.theatre.event.list
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.util.Pair
 import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
@@ -28,13 +28,12 @@ import android.view.ViewGroup
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentEventListBinding
 import com.andremion.theatre.event.list.model.EventModel
-import com.andremion.theatre.internal.injection.ViewModelFactory
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class EventListFragment : Fragment(), EventListAdapter.Callbacks {
+class EventListFragment : DaggerFragment(), EventListAdapter.Callbacks {
 
     companion object {
 
@@ -50,7 +49,7 @@ class EventListFragment : Fragment(), EventListAdapter.Callbacks {
     }
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var navigator: Navigator
 
@@ -58,11 +57,6 @@ class EventListFragment : Fragment(), EventListAdapter.Callbacks {
 
     private val viewModel by lazyThreadSafetyNone {
         ViewModelProviders.of(this, viewModelFactory).get(EventListViewModel::class.java)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidSupportInjection.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

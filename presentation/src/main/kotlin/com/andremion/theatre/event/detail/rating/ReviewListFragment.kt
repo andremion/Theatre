@@ -16,21 +16,20 @@
 
 package com.andremion.theatre.event.detail.rating
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentReviewListBinding
-import com.andremion.theatre.internal.injection.ViewModelFactory
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class ReviewListFragment : Fragment() {
+class ReviewListFragment : DaggerFragment() {
 
     companion object {
 
@@ -46,17 +45,12 @@ class ReviewListFragment : Fragment() {
     }
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var binder: FragmentReviewListBinding
 
     private val viewModel by lazyThreadSafetyNone {
         ViewModelProviders.of(this, viewModelFactory).get(EventRatingViewModel::class.java)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidSupportInjection.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

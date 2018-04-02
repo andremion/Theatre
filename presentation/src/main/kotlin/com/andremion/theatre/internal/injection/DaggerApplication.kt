@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre
+package com.andremion.theatre.internal.injection
 
 import android.app.Activity
 import android.app.Application
 import android.support.v4.app.Fragment
-import com.andremion.theatre.internal.injection.component.DaggerApplicationComponent
+import com.andremion.theatre.internal.injection.component.DaggerAppComponent
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -37,6 +37,6 @@ abstract class DaggerApplication : Application(), HasActivityInjector, HasSuppor
 
     override fun onCreate() {
         super.onCreate()
-        DaggerApplicationComponent.builder().create(this).inject(this)
+        DaggerAppComponent.builder().create(this).inject(this)
     }
 }

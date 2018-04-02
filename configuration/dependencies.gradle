@@ -13,7 +13,6 @@ ext {
     ]
 
     build = [
-            gradle: '3.0.1',
             ciBuild: System.getenv("CI_BUILD") == "true",
             // allows for -DpreDex=false to be set
             preDexEnabled: System.getProperty("preDex", "true") == "true"
@@ -54,8 +53,7 @@ ext {
     presentationKaptDependencies = [
             "android.arch.lifecycle:compiler:$lifecycleVersion",
             "com.google.dagger:dagger-compiler:${daggerVersion}",
-            "com.google.dagger:dagger-android-processor:${daggerVersion}",
-            "com.android.databinding:compiler:$build.gradle"
+            "com.google.dagger:dagger-android-processor:${daggerVersion}"
     ]
 
     presentationDependencies = [
