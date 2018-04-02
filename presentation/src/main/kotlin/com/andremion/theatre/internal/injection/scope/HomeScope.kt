@@ -14,24 +14,12 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.internal.injection.module.android
+package com.andremion.theatre.internal.injection.scope
 
-import android.content.Context
-import com.andremion.domain.Schedulers
-import com.andremion.theatre.DaggerApplication
-import com.andremion.theatre.internal.scheduler.AppSchedulers
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import javax.inject.Scope
+import kotlin.annotation.AnnotationRetention.RUNTIME
 
-@Module
-internal class ApplicationModule {
-
-    @Provides
-    @Singleton
-    internal fun providesContext(application: DaggerApplication): Context = application.applicationContext
-
-    @Provides
-    @Singleton
-    internal fun provideSchedulers(): Schedulers = AppSchedulers()
-}
+@Scope
+@MustBeDocumented
+@Retention(RUNTIME)
+annotation class HomeScope

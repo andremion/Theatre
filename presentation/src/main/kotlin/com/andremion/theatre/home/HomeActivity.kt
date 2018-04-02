@@ -16,11 +16,11 @@
 
 package com.andremion.theatre.home
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -28,15 +28,14 @@ import android.view.View.OnClickListener
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.ActivityHomeBinding
 import com.andremion.theatre.event.type.EventTypeViewModel
-import com.andremion.theatre.internal.injection.ViewModelFactory
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
-import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), OnClickListener {
+class HomeActivity : DaggerAppCompatActivity(), OnClickListener {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val binder by lazyThreadSafetyNone<ActivityHomeBinding> {
         DataBindingUtil.setContentView(this, R.layout.activity_home)
@@ -48,7 +47,6 @@ class HomeActivity : AppCompatActivity(), OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
 
         setSupportActionBar(binder.toolbar)
 

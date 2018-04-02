@@ -16,28 +16,27 @@
 
 package com.andremion.theatre.event.detail
 
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.Observable
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.ViewGroup
 import androidx.view.doOnPreDraw
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.ActivityEventBinding
 import com.andremion.theatre.event.detail.rating.EventRatingViewModel
-import com.andremion.theatre.internal.injection.ViewModelFactory
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
-import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class EventActivity : AppCompatActivity() {
+class EventActivity : DaggerAppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var navigator: Navigator
 
@@ -55,7 +54,6 @@ class EventActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
 
         supportPostponeEnterTransition()
 

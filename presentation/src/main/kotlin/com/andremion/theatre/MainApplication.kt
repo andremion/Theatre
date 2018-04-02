@@ -19,6 +19,7 @@ package com.andremion.theatre
 import android.content.Context
 import android.support.multidex.MultiDex
 import android.util.Log
+import com.andremion.theatre.internal.injection.DaggerApplication
 import com.facebook.stetho.Stetho
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins

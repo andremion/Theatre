@@ -17,22 +17,21 @@
 package com.andremion.theatre.startup
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import com.andremion.theatre.internal.injection.ViewModelFactory
 import com.andremion.theatre.internal.util.databinding.ViewBindingAdapters
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
-import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class StartupActivity : AppCompatActivity() {
+class StartupActivity : DaggerAppCompatActivity() {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
     lateinit var navigator: Navigator
@@ -43,7 +42,6 @@ class StartupActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
 
         viewModel.result.observe(this, Observer {
             navigator.navigateToHome(this@StartupActivity)
