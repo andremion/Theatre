@@ -37,7 +37,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-class TheatreApi : TheatreService {
+class TheatreApi(baseUrl: String) : TheatreService {
 
     companion object {
         private const val TIMEOUT = 10L
@@ -66,7 +66,7 @@ class TheatreApi : TheatreService {
                 .build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.API_URL)
+                .baseUrl(baseUrl)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)

@@ -16,11 +16,11 @@
 
 package com.andremion.data.remote
 
-import com.andremion.data.remote.api.TheatreApi
+import com.andremion.data.remote.api.TheatreService
 import com.andremion.data.remote.model.RatingRemoteModel
 import io.reactivex.Observable
 
-class RatingRemoteDataSource(private val theatreApi: TheatreApi) {
+class RatingRemoteDataSource(private val theatreService: TheatreService) {
 
-    fun findByEvent(event: Int): Observable<RatingRemoteModel> = theatreApi.getEventRating(event)
+    fun findByEvent(event: Int): Observable<RatingRemoteModel> = theatreService.getEventRating(event)
 }

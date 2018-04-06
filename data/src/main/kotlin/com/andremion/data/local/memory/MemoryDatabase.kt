@@ -38,7 +38,6 @@ abstract class MemoryDatabase : RoomDatabase() {
 
     companion object {
         fun newInstance(context: Context): MemoryDatabase {
-//            return Room.databaseBuilder(context, MemoryDatabase::class.java, "theatre-memory").build()
             return Room.inMemoryDatabaseBuilder(context, MemoryDatabase::class.java).build()
         }
     }
