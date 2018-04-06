@@ -8,8 +8,6 @@
 
     <data>
 
-        <import type="android.text.Html" />
-
         <variable
             name="eventDetailViewModel"
             type="com.andremion.theatre.event.detail.EventDetailViewModel" />

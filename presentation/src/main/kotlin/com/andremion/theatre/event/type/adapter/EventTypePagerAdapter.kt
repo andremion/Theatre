@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.event.type
+package com.andremion.theatre.event.type.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

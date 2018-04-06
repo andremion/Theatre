@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.event.detail
+package com.andremion.theatre.event.detail.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import com.andremion.theatre.event.detail.EventDescriptionFragment
 import com.andremion.theatre.event.detail.rating.ReviewListFragment
 
 class SectionPagerAdapter(fm: FragmentManager, private val event: Int) : FragmentStatePagerAdapter(fm) {

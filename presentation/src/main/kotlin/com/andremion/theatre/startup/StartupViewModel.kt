@@ -17,21 +17,21 @@
 package com.andremion.theatre.startup
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import com.andremion.domain.entity.EventType
 import com.andremion.domain.interactor.EventTypeGetAllUseCase
 import com.andremion.theatre.R
 import com.andremion.theatre.internal.util.BaseAndroidViewModel
+import com.andremion.theatre.internal.util.SingleLiveData
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 
 class StartupViewModel(context: Context, private val eventTypeGetAllUseCase: EventTypeGetAllUseCase)
     : BaseAndroidViewModel(context.applicationContext as Application) {
 
-    private val _result = MutableLiveData<Boolean>()
+    private val _result = SingleLiveData<Boolean>()
     val result = _result
-    private val _error = MutableLiveData<String>()
+    private val _error = SingleLiveData<String>()
     val error = _error
 
     fun startup() = addDisposable(getAllEventTypes())

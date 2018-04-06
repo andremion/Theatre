@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.internal.util.databinding
+package com.andremion.theatre.event.detail.rating.adapter
 
 import android.databinding.BindingAdapter
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.RecyclerView
+import com.andremion.domain.entity.Review
 
-object ViewPagerBindingAdapters {
-
-    @JvmStatic
-    @BindingAdapter("setupWithViewPager")
-    fun setupWithViewPager(tabLayout: TabLayout, viewPager: ViewPager) {
-        tabLayout.setupWithViewPager(viewPager)
-    }
+object ViewBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("pageMargin")
-    fun setPageMargin(viewPager: ViewPager, margin: Float) {
-        viewPager.pageMargin = margin.toInt()
+    @BindingAdapter("reviewAdapter")
+    fun setReviewAdapter(recyclerView: RecyclerView, items: List<Review>?) {
+        items?.let {
+            if (recyclerView.itemDecorationCount == 0) {
+                recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
+            }
+            recyclerView.adapter = ReviewListAdapter(it)
+        }
     }
 }

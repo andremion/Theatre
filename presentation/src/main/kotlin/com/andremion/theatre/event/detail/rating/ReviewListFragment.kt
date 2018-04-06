@@ -50,7 +50,8 @@ class ReviewListFragment : DaggerFragment() {
     private lateinit var binder: FragmentReviewListBinding
 
     private val viewModel by lazyThreadSafetyNone {
-        ViewModelProviders.of(this, viewModelFactory).get(EventRatingViewModel::class.java)
+        // Using 'activity' as scope of EventDetailViewModel to reuse the same ViewModel instance
+        activity?.let { ViewModelProviders.of(it, viewModelFactory).get(EventRatingViewModel::class.java) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,6 +63,6 @@ class ReviewListFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val event = arguments?.getInt(ARG_EVENT)!!
-        viewModel.loadEventRating(event)
+        viewModel?.loadEventRating(event)
     }
 }

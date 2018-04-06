@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.internal.util.databinding
+package com.andremion.theatre.event.list.adapter
 
 import android.databinding.BindingAdapter
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
-import com.andremion.domain.entity.Review
-import com.andremion.theatre.event.detail.rating.ReviewListAdapter
-import com.andremion.theatre.event.list.EventListAdapter
 import com.andremion.theatre.event.list.model.EventModel
 
-object RecyclerViewBindingAdapters {
+object ViewBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("eventAdapter", "eventCallbacks", requireAll = false)
@@ -32,17 +28,6 @@ object RecyclerViewBindingAdapters {
         items?.let {
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = EventListAdapter(it, callbacks)
-        }
-    }
-
-    @JvmStatic
-    @BindingAdapter("reviewAdapter")
-    fun setReviewAdapter(recyclerView: RecyclerView, items: List<Review>?) {
-        items?.let {
-            if (recyclerView.itemDecorationCount == 0) {
-                recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
-            }
-            recyclerView.adapter = ReviewListAdapter(it)
         }
     }
 }

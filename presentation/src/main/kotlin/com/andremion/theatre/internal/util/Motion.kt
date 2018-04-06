@@ -42,7 +42,7 @@ fun View.fade(show: Boolean) {
                     .setListener(object : ViewPropertyAnimatorListenerAdapter() {
                         override fun onAnimationEnd(view: View?) {
                             ViewCompat.animate(view).setListener(null)
-                            view!!.visibility = View.INVISIBLE
+                            view?.visibility = View.INVISIBLE
                         }
                     })
                     .start()

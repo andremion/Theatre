@@ -13,7 +13,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackground"
+        android:foreground="?android:attr/selectableItemBackground"
         android:paddingLeft="@dimen/text_margin"
         android:paddingRight="@dimen/text_margin"
         android:paddingTop="@dimen/activity_vertical_margin">

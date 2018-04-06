@@ -11,7 +11,7 @@
 
         <variable
             name="eventCallbacks"
-            type="com.andremion.theatre.event.list.EventListAdapter.Callbacks" />
+            type="com.andremion.theatre.event.list.adapter.EventListAdapter.Callbacks" />
     </data>
 
     <FrameLayout
@@ -31,7 +31,7 @@
                 app:eventAdapter="@{viewModel.result}"
                 app:eventCallbacks="@{eventCallbacks}"
                 app:fadeView="@{!viewModel.loading}"
-                app:layoutManager="LinearLayoutManager"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 app:showLongMessage="@{viewModel.error}"
                 tools:listitem="@layout/fragment_event_list_item" />
 

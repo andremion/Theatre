@@ -27,6 +27,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentEventListBinding
+import com.andremion.theatre.event.list.adapter.EventListAdapter
 import com.andremion.theatre.event.list.model.EventModel
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
