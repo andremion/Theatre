@@ -16,53 +16,53 @@
 
 package com.andremion.data.local
 
-import com.andremion.data.local.dao.EventTypeDao
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.AndroidJUnit4
 import com.andremion.data.local.model.EventTypeLocalModel
-import io.reactivex.Maybe
+import com.andremion.data.local.system.SystemDatabase
+import com.andremion.data.local.test.TestDatabase
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.junit.MockitoJUnitRunner
 
-@Suppress("IllegalIdentifier")
-@RunWith(MockitoJUnitRunner::class)
-/**
- * Enable the option to mock final classes is still a bit experimental, and requires a manual activation.
- * @see https://antonioleiva.com/mockito-2-kotlin/
- */
+@RunWith(AndroidJUnit4::class)
 class EventTypeLocalDataSourceTest {
 
-    @Mock
-    private lateinit var eventTypeDao: EventTypeDao
-
+    private lateinit var database: SystemDatabase
     private lateinit var eventTypeLocalDataSource: EventTypeLocalDataSource
 
     @Before
     fun setUp() {
-        eventTypeLocalDataSource = EventTypeLocalDataSource(eventTypeDao)
+        database = TestDatabase.newSystemInstance(InstrumentationRegistry.getContext())
+        eventTypeLocalDataSource = EventTypeLocalDataSource(database.eventTypeDao())
+    }
+
+    @After
+    fun tearDown() {
+        database.close()
     }
 
     @Test
-    @Throws(Exception::class)
-    fun `Given local items data, When get event Types, Should fetch data from database`() {
+    fun whenInsertEventTypesOnLocalDataSource_ThoseRowsShouldBeRetrieved() {
 
         // Given
 
-        val items = listOf(EventTypeLocalModel(1, "name"))
-        `when`(eventTypeDao.getAll()).thenReturn(Maybe.just(items))
+        val localItems = listOf(EventTypeLocalModel(1, "name"))
 
         // When
+
+        eventTypeLocalDataSource.insertAll(localItems)
 
         val testObserver = eventTypeLocalDataSource.getAll()
                 .test()
 
-        // Should
+        // Then
 
         testObserver
                 .assertComplete()
                 .assertNoErrors()
-                .assertValue(items)
+                .assertValue(localItems)
     }
+
 }

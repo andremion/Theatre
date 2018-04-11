@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.internal.util.databinding
+package com.andremion.data.local.test
 
-import android.databinding.BindingAdapter
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
+import android.arch.persistence.room.Room
+import android.content.Context
+import com.andremion.data.local.inventory.InventoryDatabase
+import com.andremion.data.local.system.SystemDatabase
 
-object ViewPagerBindingAdapters {
+object TestDatabase {
 
-    @JvmStatic
-    @BindingAdapter("setupWithViewPager")
-    fun setupWithViewPager(tabLayout: TabLayout, viewPager: ViewPager) {
-        tabLayout.setupWithViewPager(viewPager)
+    fun newSystemInstance(context: Context): SystemDatabase {
+        return Room.inMemoryDatabaseBuilder(context, SystemDatabase::class.java).build()
     }
 
-    @JvmStatic
-    @BindingAdapter("pageMargin")
-    fun setPageMargin(viewPager: ViewPager, margin: Float) {
-        viewPager.pageMargin = margin.toInt()
+    fun newInventoryInstance(context: Context): InventoryDatabase {
+        return Room.inMemoryDatabaseBuilder(context, InventoryDatabase::class.java).build()
     }
 }

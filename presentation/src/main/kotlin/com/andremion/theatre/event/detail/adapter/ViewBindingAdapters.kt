@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.internal.util
+package com.andremion.theatre.event.detail.adapter
 
-sealed class Status<out T>(val data: T?) {
-    class Loading<out T>(data: T?) : Status<T>(data)
-    class Success<out T>(data: T) : Status<T>(data)
-    class Error<out T>(val error: String) : Status<T>(null)
+import android.databinding.BindingAdapter
+import android.support.v4.app.FragmentActivity
+import android.support.v4.view.ViewPager
+
+object ViewBindingAdapters {
+
+    @JvmStatic
+    @BindingAdapter("sectionAdapter")
+    fun setSectionAdapter(viewPager: ViewPager, event: Int?) {
+        event?.let {
+            val fm = (viewPager.context as FragmentActivity).supportFragmentManager
+            viewPager.adapter = SectionPagerAdapter(fm, it)
+        }
+    }
 }

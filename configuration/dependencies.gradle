@@ -2,7 +2,7 @@ ext {
 
     compiler = [
             java  : JavaVersion.VERSION_1_8,
-            kotlin: '1.2.20'
+            kotlin: '1.2.30'
     ]
 
     android = [
@@ -121,6 +121,8 @@ ext {
 
     dataTestDependencies = [
             "junit:junit:$jUnitVersion",
-            "org.mockito:mockito-core:${mockitoVersion}"
+            "org.mockito:mockito-core:${mockitoVersion}",
+            "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     ]
+
 }

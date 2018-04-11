@@ -17,52 +17,77 @@
 package com.andremion.data.remote
 
 import com.andremion.data.remote.api.TheatreApi
+import com.andremion.data.remote.api.TheatreService
 import com.andremion.data.remote.model.EventTypeRemoteModel
-import io.reactivex.Observable
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.junit.MockitoJUnitRunner
+import org.junit.runners.JUnit4
+
 
 @Suppress("IllegalIdentifier")
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(JUnit4::class)
 /**
  * Enable the option to mock final classes is still a bit experimental, and requires a manual activation.
  * @see https://antonioleiva.com/mockito-2-kotlin/
  */
 class EventTypeRemoteDataSourceTest {
 
-    @Mock
-    private lateinit var theatreApi: TheatreApi
+    private lateinit var mockWebServer: MockWebServer
+
+    private lateinit var theatreService: TheatreService
 
     private lateinit var eventTypeRemoteDataSource: EventTypeRemoteDataSource
 
     @Before
     fun setUp() {
-        eventTypeRemoteDataSource = EventTypeRemoteDataSource(theatreApi)
+        mockWebServer = MockWebServer()
+
+        theatreService = TheatreApi(mockWebServer.url("/").toString())
+
+        eventTypeRemoteDataSource = EventTypeRemoteDataSource(theatreService)
+    }
+
+    @After
+    fun stopServer() {
+        mockWebServer.shutdown()
     }
 
     @Test
     @Throws(Exception::class)
-    fun `Given remote items data, When get event Types, Should fetch data from API`() {
+    fun `Given event type data, When get all, Should get those event types`() {
 
         // Given
 
         val items = listOf(EventTypeRemoteModel(1, "name"))
-        `when`(theatreApi.getEventTypes()).thenReturn(Observable.just(items))
+        val json = """
+        {
+            "EventTypes": [
+                {
+                    "EventTypeId": 1,
+                    "EventTypeName": "name"
+                }
+            ]
+        }
+        """
+
+        val response = MockResponse().setBody(json)
+        mockWebServer.enqueue(response)
 
         // When
 
         val testObserver = eventTypeRemoteDataSource.getAll()
                 .test()
 
-        // Should
+        // Then
 
         testObserver
                 .assertComplete()
                 .assertNoErrors()
                 .assertValue(items)
     }
+
 }

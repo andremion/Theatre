@@ -24,7 +24,7 @@
                 android:id="@+id/list_review"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layoutManager="LinearLayoutManager"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 app:reviewAdapter="@{viewModel.result.reviews}"
                 app:showLongMessage="@{viewModel.error}"
                 tools:listitem="@layout/fragment_review_list_item" />

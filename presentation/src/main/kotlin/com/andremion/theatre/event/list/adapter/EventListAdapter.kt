@@ -14,34 +14,40 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.event.detail.rating
+package com.andremion.theatre.event.list.adapter
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import com.andremion.domain.entity.Review
 import com.andremion.theatre.R
-import com.andremion.theatre.databinding.FragmentReviewListItemBinding
+import com.andremion.theatre.databinding.FragmentEventListItemBinding
+import com.andremion.theatre.event.list.model.EventModel
 
-class ReviewListAdapter(private val items: List<Review>) :
-        RecyclerView.Adapter<ReviewListAdapter.ViewHolder>() {
+class EventListAdapter(private val items: List<EventModel>, private val callbacks: Callbacks? = null) :
+        RecyclerView.Adapter<EventListAdapter.ViewHolder>() {
+
+    interface Callbacks {
+        fun onItemClick(view: View, item: EventModel)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding: FragmentReviewListItemBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_review_list_item, parent, false)
+        val binding: FragmentEventListItemBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_list_item, parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.review = items[position]
+        holder.binding.event = items[position]
         holder.binding.executePendingBindings()
     }
 
     override fun getItemCount(): Int = items.size
 
-    inner class ViewHolder(val binding: FragmentReviewListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: FragmentEventListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
+            itemView.setOnClickListener { callbacks?.onItemClick(it, items[adapterPosition]) }
         }
     }
 }

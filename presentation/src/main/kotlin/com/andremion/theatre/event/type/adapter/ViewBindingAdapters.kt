@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package com.andremion.theatre.internal.util.databinding
+package com.andremion.theatre.event.type.adapter
 
 import android.databinding.BindingAdapter
-import android.support.design.widget.TabLayout
+import android.support.v4.app.FragmentActivity
 import android.support.v4.view.ViewPager
+import com.andremion.domain.entity.EventType
 
-object ViewPagerBindingAdapters {
-
-    @JvmStatic
-    @BindingAdapter("setupWithViewPager")
-    fun setupWithViewPager(tabLayout: TabLayout, viewPager: ViewPager) {
-        tabLayout.setupWithViewPager(viewPager)
-    }
+object ViewBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("pageMargin")
-    fun setPageMargin(viewPager: ViewPager, margin: Float) {
-        viewPager.pageMargin = margin.toInt()
+    @BindingAdapter("eventTypeAdapter")
+    fun setEventTypeAdapter(viewPager: ViewPager, items: List<EventType>?) {
+        items?.let {
+            val fm = (viewPager.context as FragmentActivity).supportFragmentManager
+            viewPager.adapter = EventTypePagerAdapter(fm, it)
+        }
     }
 }

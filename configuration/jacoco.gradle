@@ -20,19 +20,19 @@ FileCollection jacocoSourceDirectories(Set subprojects) {
 
 FileTree jacocoClassDirectories(Set subprojects) {
     List<String> excludes = [
+            // Android
             'android/**/*.*',
             '**/R.class',
             '**/R$*.class',
-            '**/*$ViewInjector*.*',
-            '**/*$ViewBinder*.*',
             '**/BuildConfig.*',
-            '**/Manifest*.*',
-            '**/Dagger*.*',
-            '**/*Module_Provide*Factory.*',
-            '**/*_Factory.*',
-            '**/*_MembersInjector.*',
+            // Databinding
+            '**/databinding/*Binding.*',
+            '**/BR.class',
+            // Dependency Injection
             '**/injection/**/*.*',
-            '**/*_LifecycleAdapter.*'
+            // Pojos, Models, Entities
+            '**/model/*.*',
+            '**/entity/*.*'
     ]
     def classDirectories = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", exclude: excludes)
     subprojects.each { project ->

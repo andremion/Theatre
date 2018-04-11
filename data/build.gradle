@@ -11,8 +11,6 @@ android {
         targetSdkVersion ext.android.targetSdk
         versionCode ext.application.versionCode
         versionName ext.application.versionName
-
-        testInstrumentationRunner ext.application.testInstrumentationRunner
     }
 
     buildTypes {
