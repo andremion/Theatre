@@ -11,8 +11,6 @@ android {
         targetSdkVersion ext.android.targetSdk
         versionCode ext.application.versionCode
         versionName ext.application.versionName
-
-        testInstrumentationRunner ext.application.testInstrumentationRunner
     }
 
     buildTypes {
@@ -28,7 +26,6 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
 }
 
@@ -46,5 +43,4 @@ dependencies {
     kapt dataKaptDependencies
     implementation dataDependencies
     testImplementation dataTestDependencies
-    androidTestImplementation dataInstrumentationTestDependencies
 }

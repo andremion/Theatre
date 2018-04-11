@@ -125,8 +125,4 @@ ext {
             "com.squareup.okhttp3:mockwebserver:$okHttpVersion"
     ]
 
-    dataInstrumentationTestDependencies = [
-            "com.android.support.test.espresso:espresso-core:$espressoVersion",
-            "com.android.support:support-annotations:$supportLibraryVersion"
-    ]
 }

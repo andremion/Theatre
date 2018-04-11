@@ -18,8 +18,9 @@ package com.andremion.data.local
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.andremion.data.local.disk.DiskDatabase
 import com.andremion.data.local.model.EventTypeLocalModel
+import com.andremion.data.local.system.SystemDatabase
+import com.andremion.data.local.test.TestDatabase
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -28,12 +29,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class EventTypeLocalDataSourceTest {
 
-    private lateinit var database: DiskDatabase
+    private lateinit var database: SystemDatabase
     private lateinit var eventTypeLocalDataSource: EventTypeLocalDataSource
 
     @Before
     fun setUp() {
-        database = DiskDatabase.newInstance(InstrumentationRegistry.getContext())
+        database = TestDatabase.newSystemInstance(InstrumentationRegistry.getContext())
         eventTypeLocalDataSource = EventTypeLocalDataSource(database.eventTypeDao())
     }
 
@@ -43,7 +44,7 @@ class EventTypeLocalDataSourceTest {
     }
 
     @Test
-    fun whenInsertEventTypesOnLocalDataSource_ThoseRowsShouldBeRetreived() {
+    fun whenInsertEventTypesOnLocalDataSource_ThoseRowsShouldBeRetrieved() {
 
         // Given
 
