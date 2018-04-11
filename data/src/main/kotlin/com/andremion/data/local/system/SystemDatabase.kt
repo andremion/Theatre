@@ -14,31 +14,30 @@
  * limitations under the License.
  */
 
-package com.andremion.data.local.memory
+package com.andremion.data.local.system
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import com.andremion.data.local.dao.EventDao
-import com.andremion.data.local.dao.RatingDao
-import com.andremion.data.local.model.EventLocalModel
-import com.andremion.data.local.model.RatingLocalModel
-import com.andremion.data.local.model.ReviewLocalModel
+import com.andremion.data.local.dao.EventTypeDao
+import com.andremion.data.local.dao.VenueDao
+import com.andremion.data.local.model.EventTypeLocalModel
+import com.andremion.data.local.model.VenueLocalModel
 import com.andremion.data.local.util.Converters
 
-@Database(entities = [EventLocalModel::class, RatingLocalModel::class, ReviewLocalModel::class], version = 1, exportSchema = false)
+@Database(entities = [EventTypeLocalModel::class, VenueLocalModel::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class MemoryDatabase : RoomDatabase() {
+abstract class SystemDatabase : RoomDatabase() {
 
-    abstract fun eventDao(): EventDao
+    abstract fun eventTypeDao(): EventTypeDao
 
-    abstract fun ratingDao(): RatingDao
+    abstract fun venueDao(): VenueDao
 
     companion object {
-        fun newInstance(context: Context): MemoryDatabase {
-            return Room.inMemoryDatabaseBuilder(context, MemoryDatabase::class.java).build()
+        fun newInstance(context: Context): SystemDatabase {
+            return Room.databaseBuilder(context, SystemDatabase::class.java, "theatre-system.db").build()
         }
     }
 }

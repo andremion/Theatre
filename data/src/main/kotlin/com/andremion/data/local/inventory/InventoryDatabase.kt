@@ -14,30 +14,31 @@
  * limitations under the License.
  */
 
-package com.andremion.data.local.disk
+package com.andremion.data.local.inventory
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import com.andremion.data.local.dao.EventTypeDao
-import com.andremion.data.local.dao.VenueDao
-import com.andremion.data.local.model.EventTypeLocalModel
-import com.andremion.data.local.model.VenueLocalModel
+import com.andremion.data.local.dao.EventDao
+import com.andremion.data.local.dao.RatingDao
+import com.andremion.data.local.model.EventLocalModel
+import com.andremion.data.local.model.RatingLocalModel
+import com.andremion.data.local.model.ReviewLocalModel
 import com.andremion.data.local.util.Converters
 
-@Database(entities = [EventTypeLocalModel::class, VenueLocalModel::class], version = 1, exportSchema = false)
+@Database(entities = [EventLocalModel::class, RatingLocalModel::class, ReviewLocalModel::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class DiskDatabase : RoomDatabase() {
+abstract class InventoryDatabase : RoomDatabase() {
 
-    abstract fun eventTypeDao(): EventTypeDao
+    abstract fun eventDao(): EventDao
 
-    abstract fun venueDao(): VenueDao
+    abstract fun ratingDao(): RatingDao
 
     companion object {
-        fun newInstance(context: Context): DiskDatabase {
-            return Room.databaseBuilder(context, DiskDatabase::class.java, "theatre-database").build()
+        fun newInstance(context: Context): InventoryDatabase {
+            return Room.inMemoryDatabaseBuilder(context, InventoryDatabase::class.java).build()
         }
     }
 }

@@ -28,8 +28,8 @@ import com.andremion.data.local.dao.EventDao
 import com.andremion.data.local.dao.EventTypeDao
 import com.andremion.data.local.dao.RatingDao
 import com.andremion.data.local.dao.VenueDao
-import com.andremion.data.local.disk.DiskDatabase
-import com.andremion.data.local.memory.MemoryDatabase
+import com.andremion.data.local.inventory.InventoryDatabase
+import com.andremion.data.local.system.SystemDatabase
 import com.andremion.data.remote.EventRemoteDataSource
 import com.andremion.data.remote.EventTypeRemoteDataSource
 import com.andremion.data.remote.RatingRemoteDataSource
@@ -83,31 +83,31 @@ internal class DataModule {
 
     @Provides
     @Singleton
-    internal fun provideDiskDatabase(context: Context): DiskDatabase {
-        return DiskDatabase.newInstance(context)
+    internal fun provideSystemDatabase(context: Context): SystemDatabase {
+        return SystemDatabase.newInstance(context)
     }
 
     @Provides
     @Singleton
-    internal fun provideMemoryDatabase(context: Context): MemoryDatabase {
-        return MemoryDatabase.newInstance(context)
+    internal fun provideInventoryDatabase(context: Context): InventoryDatabase {
+        return InventoryDatabase.newInstance(context)
     }
 
     @Provides
     @Singleton
-    internal fun provideEventTypeDao(diskDatabase: DiskDatabase): EventTypeDao = diskDatabase.eventTypeDao()
+    internal fun provideEventTypeDao(systemDatabase: SystemDatabase): EventTypeDao = systemDatabase.eventTypeDao()
 
     @Provides
     @Singleton
-    internal fun provideVenueDao(diskDatabase: DiskDatabase): VenueDao = diskDatabase.venueDao()
+    internal fun provideVenueDao(systemDatabase: SystemDatabase): VenueDao = systemDatabase.venueDao()
 
     @Provides
     @Singleton
-    internal fun provideEventDao(memoryDatabase: MemoryDatabase): EventDao = memoryDatabase.eventDao()
+    internal fun provideEventDao(inventoryDatabase: InventoryDatabase): EventDao = inventoryDatabase.eventDao()
 
     @Provides
     @Singleton
-    internal fun provideRatingTypeDao(memoryDatabase: MemoryDatabase): RatingDao = memoryDatabase.ratingDao()
+    internal fun provideRatingTypeDao(inventoryDatabase: InventoryDatabase): RatingDao = inventoryDatabase.ratingDao()
 
     @Provides
     @Singleton
