@@ -28,7 +28,7 @@ ext {
     // Libraries
     multidexVersion = '1.0.2'
     daggerVersion = '2.14.+'
-    supportLibraryVersion = '27.0.+'
+    supportLibraryVersion = '27.1.1'
     rxKotlinVersion = '2.2.+'
     rxAndroidVersion = '2.0.+'
     retrofitVersion = '2.3.+'
@@ -45,7 +45,7 @@ ext {
     // Testing
     jUnitVersion = '4.12'
     mockitoVersion = '2.13.+'
-    espressoVersion = '3.0.+'
+    espressoVersion = '3.0.1'
     jacocoVersion = '0.7.9'
 
     // Presentation
