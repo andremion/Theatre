@@ -18,28 +18,27 @@ package com.andremion.theatre.home
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
+import com.andremion.theatre.BaseActivity
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.ActivityHomeBinding
 import com.andremion.theatre.event.type.EventTypeViewModel
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class HomeActivity : DaggerAppCompatActivity(), OnClickListener {
+class HomeActivity : BaseActivity<ActivityHomeBinding>(), OnClickListener {
+
+    override val layoutResourceId: Int
+        get() = R.layout.activity_home
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val binder by lazyThreadSafetyNone<ActivityHomeBinding> {
-        DataBindingUtil.setContentView(this, R.layout.activity_home)
-    }
 
     private val viewModel by lazyThreadSafetyNone {
         ViewModelProviders.of(this, viewModelFactory).get(EventTypeViewModel::class.java)
@@ -48,10 +47,10 @@ class HomeActivity : DaggerAppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setSupportActionBar(binder.toolbar)
+        setSupportActionBar(viewDataBinding.toolbar)
 
-        binder.viewModel = viewModel
-        binder.fabClick = this
+        viewDataBinding.viewModel = viewModel
+        viewDataBinding.fabClick = this
 
         viewModel.loadEventTypeList()
     }
@@ -69,6 +68,6 @@ class HomeActivity : DaggerAppCompatActivity(), OnClickListener {
             }
 
     override fun onClick(v: View?) {
-        Snackbar.make(binder.root, "Replace with your own action", Snackbar.LENGTH_LONG).show()
+        Snackbar.make(viewDataBinding.root, "Replace with your own action", Snackbar.LENGTH_LONG).show()
     }
 }

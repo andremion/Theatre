@@ -19,30 +19,26 @@ package com.andremion.theatre.event.detail
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.databinding.Observable
 import android.os.Bundle
 import android.view.Menu
 import android.view.ViewGroup
 import androidx.view.doOnPreDraw
+import com.andremion.theatre.BaseActivity
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.ActivityEventBinding
 import com.andremion.theatre.event.detail.rating.EventRatingViewModel
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-class EventActivity : DaggerAppCompatActivity() {
-
+class EventActivity : BaseActivity<ActivityEventBinding>() {
+    override val layoutResourceId: Int
+        get() = R.layout.activity_event
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     @Inject
     lateinit var navigator: Navigator
-
-    private val binder by lazyThreadSafetyNone<ActivityEventBinding> {
-        DataBindingUtil.setContentView(this, R.layout.activity_event)
-    }
 
     private val eventDetailViewModel by lazyThreadSafetyNone {
         ViewModelProviders.of(this, viewModelFactory).get(EventDetailViewModel::class.java)
@@ -57,11 +53,11 @@ class EventActivity : DaggerAppCompatActivity() {
 
         supportPostponeEnterTransition()
 
-        setSupportActionBar(binder.toolbar)
+        setSupportActionBar(viewDataBinding.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        binder.eventDetailViewModel = eventDetailViewModel
-        binder.eventRatingViewModel = eventRatingViewModel
+        viewDataBinding.eventDetailViewModel = eventDetailViewModel
+        viewDataBinding.eventRatingViewModel = eventRatingViewModel
 
         val event = navigator.getEvent(this)
         eventDetailViewModel.loadEventDetail(event)
