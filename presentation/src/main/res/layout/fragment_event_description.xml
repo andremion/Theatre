@@ -11,7 +11,7 @@
             type="com.andremion.theatre.event.detail.EventDetailViewModel" />
     </data>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,6 +23,6 @@
             android:text='@{Html.fromHtml(viewModel.event.description)}'
             tools:text="@tools:sample/lorem/random" />
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

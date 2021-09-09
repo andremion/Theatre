@@ -25,7 +25,7 @@ import com.andremion.data.remote.model.EventTypeRemoteModel
 import com.andremion.data.remote.model.RatingRemoteModel
 import com.andremion.data.remote.model.VenueRemoteModel
 import com.serjltt.moshi.adapters.Wrapped
-import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import io.reactivex.Observable
 import okhttp3.OkHttpClient

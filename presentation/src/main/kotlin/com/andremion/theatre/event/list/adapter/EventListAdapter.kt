@@ -16,11 +16,11 @@
 
 package com.andremion.theatre.event.list.adapter
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentEventListItemBinding
 import com.andremion.theatre.event.list.model.EventModel
@@ -47,7 +47,7 @@ class EventListAdapter(private val items: List<EventModel>, private val callback
 
     inner class ViewHolder(val binding: FragmentEventListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
-            itemView.setOnClickListener { callbacks?.onItemClick(it, items[adapterPosition]) }
+            itemView.setOnClickListener { callbacks?.onItemClick(it, items[bindingAdapterPosition]) }
         }
     }
 }

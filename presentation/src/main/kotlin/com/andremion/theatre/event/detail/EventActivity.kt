@@ -16,15 +16,15 @@
 
 package com.andremion.theatre.event.detail
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.databinding.Observable
 import android.os.Bundle
 import android.view.Menu
 import android.view.ViewGroup
-import androidx.view.doOnPreDraw
+import androidx.activity.viewModels
+import androidx.core.view.doOnPreDraw
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.ActivityEventBinding
 import com.andremion.theatre.event.detail.rating.EventRatingViewModel
@@ -44,13 +44,9 @@ class EventActivity : DaggerAppCompatActivity() {
         DataBindingUtil.setContentView(this, R.layout.activity_event)
     }
 
-    private val eventDetailViewModel by lazyThreadSafetyNone {
-        ViewModelProviders.of(this, viewModelFactory).get(EventDetailViewModel::class.java)
-    }
+    private val eventDetailViewModel by viewModels<EventDetailViewModel> { viewModelFactory }
 
-    private val eventRatingViewModel by lazyThreadSafetyNone {
-        ViewModelProviders.of(this, viewModelFactory).get(EventRatingViewModel::class.java)
-    }
+    private val eventRatingViewModel by viewModels<EventRatingViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,8 +72,8 @@ class EventActivity : DaggerAppCompatActivity() {
         })
     }
 
-    override fun getParentActivityIntent(): Intent {
-        return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    override fun getParentActivityIntent(): Intent? {
+        return super.getParentActivityIntent()?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

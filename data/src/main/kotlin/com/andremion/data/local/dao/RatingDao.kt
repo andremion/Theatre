@@ -16,7 +16,11 @@
 
 package com.andremion.data.local.dao
 
-import android.arch.persistence.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
 import com.andremion.data.local.model.RatingAndReviewLocalModel
 import com.andremion.data.local.model.RatingLocalModel
 import com.andremion.data.local.model.ReviewLocalModel
@@ -25,7 +29,7 @@ import io.reactivex.Maybe
 @Dao
 interface RatingDao {
 
-    @Transaction // https://developer.android.com/reference/android/arch/persistence/room/Transaction.html
+    @Transaction // https://developer.android.com/reference/androidx/room/Transaction
     @Query("SELECT * FROM Rating WHERE event = :event")
     fun findByEvent(event: Int): Maybe<RatingAndReviewLocalModel>
 

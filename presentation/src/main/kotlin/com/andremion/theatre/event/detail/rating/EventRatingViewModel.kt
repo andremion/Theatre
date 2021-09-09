@@ -18,8 +18,8 @@ package com.andremion.theatre.event.detail.rating
 
 import android.app.Application
 import android.content.Context
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import com.andremion.domain.entity.Rating
 import com.andremion.domain.interactor.RatingFindByEventUseCase
 import com.andremion.theatre.R

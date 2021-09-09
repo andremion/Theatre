@@ -16,20 +16,19 @@
 
 package com.andremion.theatre.event.list
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.util.Pair
-import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentEventListBinding
 import com.andremion.theatre.event.list.adapter.EventListAdapter
 import com.andremion.theatre.event.list.model.EventModel
-import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -56,9 +55,7 @@ class EventListFragment : DaggerFragment(), EventListAdapter.Callbacks {
 
     private lateinit var binder: FragmentEventListBinding
 
-    private val viewModel by lazyThreadSafetyNone {
-        ViewModelProviders.of(this, viewModelFactory).get(EventListViewModel::class.java)
-    }
+    private val viewModel by viewModels<EventListViewModel> {viewModelFactory}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binder = DataBindingUtil.inflate(inflater, R.layout.fragment_event_list, container, false)
@@ -77,7 +74,7 @@ class EventListFragment : DaggerFragment(), EventListAdapter.Callbacks {
         val cardView = view.findViewById<View>(R.id.cardview)
         val imageView = view.findViewById<View>(R.id.image_thumbnail)
         val nameView = view.findViewById<View>(R.id.text_name)
-        val sharedViews = arrayOf(
+        val sharedViews: Array<Pair<View, String>> = arrayOf(
                 Pair(cardView, ViewCompat.getTransitionName(cardView)),
                 Pair(imageView, ViewCompat.getTransitionName(imageView)),
                 Pair(nameView, ViewCompat.getTransitionName(nameView)))

@@ -18,17 +18,17 @@ package com.andremion.theatre.navigation
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.util.Pair
 import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import com.andremion.theatre.event.detail.EventActivity
 import com.andremion.theatre.home.HomeActivity
 
 class Navigator {
 
     companion object {
-        private val EXTRA_EVENT = "${EventActivity::class.java.`package`.name}.extra.EVENT"
+        private val EXTRA_EVENT = "${EventActivity::class.java.`package`!!.name}.extra.EVENT"
     }
 
     fun navigateToHome(activity: Activity) {

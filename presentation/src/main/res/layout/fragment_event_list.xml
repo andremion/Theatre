@@ -18,24 +18,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:onRefreshListener="@{() -> viewModel.refresh()}"
             app:refreshing="@{viewModel.loading}">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_event"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:eventAdapter="@{viewModel.result}"
                 app:eventCallbacks="@{eventCallbacks}"
                 app:fadeView="@{!viewModel.loading}"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:showLongMessage="@{viewModel.error}"
                 tools:listitem="@layout/fragment_event_list_item" />
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <!--Empty state-->
         <LinearLayout

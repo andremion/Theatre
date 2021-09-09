@@ -16,8 +16,8 @@
 
 package com.andremion.data.local.test
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.andremion.data.local.inventory.InventoryDatabase
 import com.andremion.data.local.system.SystemDatabase
 

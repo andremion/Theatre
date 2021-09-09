@@ -16,14 +16,14 @@
 
 package com.andremion.theatre.internal.util.databinding
 
-import android.databinding.BindingAdapter
-import android.support.design.widget.BaseTransientBottomBar
-import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.andremion.theatre.internal.util.fade
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 
 object ViewBindingAdapters {
 
