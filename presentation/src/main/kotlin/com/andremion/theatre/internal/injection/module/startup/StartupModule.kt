@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.internal.injection.module.startup
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.domain.Schedulers
 import com.andremion.domain.gateway.SystemGateway
 import com.andremion.domain.interactor.EventTypeGetAllUseCase

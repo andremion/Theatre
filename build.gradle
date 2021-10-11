@@ -1,11 +1,11 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
     dependencies {
         apply from: 'configuration/dependencies.gradle'
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$compiler.kotlin"
         classpath "org.jacoco:org.jacoco.core:$jacocoVersion"
     }
@@ -13,13 +13,8 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
 }
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
 apply from: './configuration/jacoco.gradle'

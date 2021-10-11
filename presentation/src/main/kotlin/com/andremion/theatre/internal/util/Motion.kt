@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.internal.util
 
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPropertyAnimatorListenerAdapter
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter
 
 /**
  * @param show true, if the view will fade-in or false to fade-out
@@ -41,8 +41,10 @@ fun View.fade(show: Boolean) {
                     .alpha(0f)
                     .setListener(object : ViewPropertyAnimatorListenerAdapter() {
                         override fun onAnimationEnd(view: View?) {
-                            ViewCompat.animate(view).setListener(null)
-                            view?.visibility = View.INVISIBLE
+                            view?.run {
+                                ViewCompat.animate(this).setListener(null)
+                                visibility = View.INVISIBLE
+                            }
                         }
                     })
                     .start()

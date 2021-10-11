@@ -16,19 +16,19 @@
 
 package com.andremion.theatre.home
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
+import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.ActivityHomeBinding
 import com.andremion.theatre.event.type.EventTypeViewModel
 import com.andremion.theatre.internal.util.lazyThreadSafetyNone
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -41,9 +41,7 @@ class HomeActivity : DaggerAppCompatActivity(), OnClickListener {
         DataBindingUtil.setContentView(this, R.layout.activity_home)
     }
 
-    private val viewModel by lazyThreadSafetyNone {
-        ViewModelProviders.of(this, viewModelFactory).get(EventTypeViewModel::class.java)
-    }
+    private val viewModel by viewModels<EventTypeViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

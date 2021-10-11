@@ -16,9 +16,9 @@
 
 package com.andremion.data.local.model
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import java.util.*
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import java.util.Date
 
 @Entity(tableName = "Review",
         primaryKeys = ["event", "consumer"],

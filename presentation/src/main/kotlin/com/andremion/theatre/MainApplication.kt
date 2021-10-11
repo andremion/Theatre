@@ -17,8 +17,8 @@
 package com.andremion.theatre
 
 import android.content.Context
-import android.support.multidex.MultiDex
 import android.util.Log
+import androidx.multidex.MultiDex
 import com.andremion.theatre.internal.injection.DaggerApplication
 import com.facebook.stetho.Stetho
 import io.reactivex.exceptions.UndeliverableException
@@ -70,13 +70,13 @@ class MainApplication : DaggerApplication() {
             if (e is NullPointerException || e is IllegalArgumentException) {
                 // that's likely a bug in the application
                 Thread.currentThread().uncaughtExceptionHandler
-                        .uncaughtException(Thread.currentThread(), e)
+                    ?.uncaughtException(Thread.currentThread(), e)
                 return@setErrorHandler
             }
             if (e is IllegalStateException) {
                 // that's a bug in RxJava or in a custom operator
                 Thread.currentThread().uncaughtExceptionHandler
-                        .uncaughtException(Thread.currentThread(), e)
+                    ?.uncaughtException(Thread.currentThread(), e)
                 return@setErrorHandler
             }
         }

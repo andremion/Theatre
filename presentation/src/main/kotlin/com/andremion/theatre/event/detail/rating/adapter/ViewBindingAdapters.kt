@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.event.detail.rating.adapter
 
-import android.databinding.BindingAdapter
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.andremion.domain.entity.Review
 
 object ViewBindingAdapters {

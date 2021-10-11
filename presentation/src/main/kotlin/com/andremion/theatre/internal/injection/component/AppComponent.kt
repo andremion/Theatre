@@ -33,6 +33,6 @@ import javax.inject.Singleton
     DataModule::class])
 internal interface AppComponent : AndroidInjector<DaggerApplication> {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<DaggerApplication>()
+    @Component.Factory
+    interface Factory : AndroidInjector.Factory<DaggerApplication>
 }

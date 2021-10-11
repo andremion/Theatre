@@ -1,7 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 android {
     def ext = rootProject.extensions.ext
@@ -22,11 +23,6 @@ android {
         cruncherEnabled !ext.build.ciBuild
     }
 
-    dexOptions {
-        // Skip pre-dexing when running on CI or when disabled via -DpreDex=false.
-        preDexLibraries !ext.build.ciBuild && ext.build.preDexEnabled
-    }
-
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -35,12 +31,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
 
     dataBinding {
@@ -60,7 +50,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':domain')
     implementation project(':data')
     kapt presentationKaptDependencies

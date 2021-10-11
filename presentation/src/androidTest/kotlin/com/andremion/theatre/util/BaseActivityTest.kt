@@ -17,9 +17,9 @@
 package com.andremion.theatre.util
 
 import android.os.Build
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
 import android.view.WindowManager
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)

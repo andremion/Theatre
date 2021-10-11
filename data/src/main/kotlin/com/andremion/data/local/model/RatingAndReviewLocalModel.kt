@@ -16,8 +16,8 @@
 
 package com.andremion.data.local.model
 
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Relation
+import androidx.room.Embedded
+import androidx.room.Relation
 
 data class RatingAndReviewLocalModel(@Embedded var rating: RatingLocalModel) {
 

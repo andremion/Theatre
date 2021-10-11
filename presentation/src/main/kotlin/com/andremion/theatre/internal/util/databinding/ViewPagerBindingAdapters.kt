@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.internal.util.databinding
 
-import android.databinding.BindingAdapter
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
+import androidx.databinding.BindingAdapter
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 
 object ViewPagerBindingAdapters {
 

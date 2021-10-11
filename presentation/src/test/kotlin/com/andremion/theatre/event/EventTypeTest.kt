@@ -22,8 +22,8 @@ import com.andremion.domain.entity.EventType
 import com.andremion.domain.interactor.EventTypeGetAllUseCase
 import com.andremion.theatre.event.type.EventTypeViewModel
 import io.reactivex.Observable
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.internal.injection.module.event
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.domain.Schedulers
 import com.andremion.domain.gateway.InventoryGateway
 import com.andremion.domain.interactor.EventGetByIdUseCase
@@ -42,7 +42,6 @@ internal abstract class EventModule {
     @ContributesAndroidInjector
     internal abstract fun contributeReviewListFragment(): ReviewListFragment
 
-    @Module
     companion object {
 
         @EventScope

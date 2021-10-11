@@ -16,16 +16,15 @@
 
 package com.andremion.theatre.event.detail
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentEventDescriptionBinding
-import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -43,10 +42,7 @@ class EventDescriptionFragment : DaggerFragment() {
 
     private lateinit var binder: FragmentEventDescriptionBinding
 
-    private val viewModel by lazyThreadSafetyNone {
-        // Using 'activity' as scope of EventDetailViewModel to reuse the same ViewModel instance
-        activity?.let { ViewModelProviders.of(it, viewModelFactory).get(EventDetailViewModel::class.java) }
-    }
+    private val viewModel by activityViewModels<EventDetailViewModel> { viewModelFactory }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binder = DataBindingUtil.inflate(inflater, R.layout.fragment_event_description, container, false)

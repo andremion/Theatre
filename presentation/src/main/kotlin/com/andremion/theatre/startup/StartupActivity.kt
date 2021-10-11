@@ -16,15 +16,14 @@
 
 package com.andremion.theatre.startup
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.BaseTransientBottomBar
-import android.support.design.widget.Snackbar
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.theatre.internal.util.databinding.ViewBindingAdapters
-import com.andremion.theatre.internal.util.lazyThreadSafetyNone
 import com.andremion.theatre.navigation.Navigator
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -36,9 +35,7 @@ class StartupActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var navigator: Navigator
 
-    private val viewModel by lazyThreadSafetyNone {
-        ViewModelProviders.of(this, viewModelFactory).get(StartupViewModel::class.java)
-    }
+    private val viewModel by viewModels<StartupViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

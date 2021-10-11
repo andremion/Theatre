@@ -7,6 +7,7 @@ allprojects {
 
     tasks.withType(Test) {
         jacoco.includeNoLocationClasses = true
+        jacoco.excludes = ['jdk.internal.*']
     }
 }
 
@@ -49,11 +50,11 @@ task jacocoTestReport(type: JacocoReport,
     group = 'Reporting'
     description = 'Generate JaCoCo coverage reports'
 
-    sourceDirectories = jacocoSourceDirectories(subprojects)
-    classDirectories = jacocoClassDirectories(subprojects)
-    executionData = rootProject.fileTree(dir: '.', includes: [
+    sourceDirectories.setFrom(jacocoSourceDirectories(subprojects))
+    classDirectories.setFrom(jacocoClassDirectories(subprojects))
+    executionData.setFrom(rootProject.fileTree(dir: '.', includes: [
             "**/testDebugUnitTest.exec", "**/test.exec", "**/*coverage.ec"
-    ])
+    ]))
 
     reports {
         xml.enabled = true

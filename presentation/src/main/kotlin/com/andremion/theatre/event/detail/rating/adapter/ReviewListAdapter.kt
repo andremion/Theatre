@@ -16,10 +16,10 @@
 
 package com.andremion.theatre.event.detail.rating.adapter
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.andremion.domain.entity.Review
 import com.andremion.theatre.R
 import com.andremion.theatre.databinding.FragmentReviewListItemBinding

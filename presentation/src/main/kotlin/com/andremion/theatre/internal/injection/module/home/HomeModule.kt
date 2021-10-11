@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.internal.injection.module.home
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.andremion.domain.Schedulers
 import com.andremion.domain.gateway.InventoryGateway
 import com.andremion.domain.gateway.SystemGateway
@@ -38,7 +38,6 @@ internal abstract class HomeModule {
     @ContributesAndroidInjector
     internal abstract fun contributeEventListFragment(): EventListFragment
 
-    @Module
     companion object {
 
         @HomeScope

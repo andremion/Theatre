@@ -16,9 +16,9 @@
 
 package com.andremion.theatre.event.type.adapter
 
-import android.databinding.BindingAdapter
-import android.support.v4.app.FragmentActivity
-import android.support.v4.view.ViewPager
+import androidx.databinding.BindingAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager.widget.ViewPager
 import com.andremion.domain.entity.EventType
 
 object ViewBindingAdapters {

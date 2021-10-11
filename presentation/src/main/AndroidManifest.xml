@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".startup.StartupActivity"
+            android:exported="true"
             android:noHistory="true"
             android:theme="@style/AppTheme.Startup">
             <intent-filter>
@@ -25,9 +26,11 @@
         </activity>
         <activity
             android:name=".home.HomeActivity"
+            android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".event.detail.EventActivity"
+            android:exported="false"
             android:label=""
             android:parentActivityName=".home.HomeActivity"
             android:theme="@style/AppTheme.Event"

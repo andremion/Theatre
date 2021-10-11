@@ -35,7 +35,7 @@ class RetryAfterInterceptor : Interceptor {
         val request = chain.request()
         var response = chain.proceed(request)
 
-        if (response.code() == HttpURLConnection.HTTP_FORBIDDEN) {
+        if (response.code == HttpURLConnection.HTTP_FORBIDDEN) {
             val retryAfter = parseRetryAfter(response)
             if (retryAfter != null) {
                 logger.log("Retrying after $retryAfter seconds...")

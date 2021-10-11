@@ -18,9 +18,9 @@ package com.andremion.theatre.event.type
 
 import android.app.Application
 import android.content.Context
-import android.databinding.ObservableArrayList
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import com.andremion.domain.entity.EventType
 import com.andremion.domain.interactor.EventTypeGetAllUseCase
 import com.andremion.theatre.R
